@@ -54,16 +54,6 @@ interface NewableFunction extends Function {}
 /** Marker for contextual 'this' type */
 interface ThisType<T> {}
 
-// stub interfaces
-interface Instance {
-	ClassName: string;
-}
-interface CheckableTypes {}
-interface Instances {}
-interface AbstractInstances {}
-interface Vector3 {}
-interface RBXScriptSignal {}
-
 /** A function type which is assignable to any other function type (and any function is assignable to). */
 type Callback = (...args: Array<any>) => any;
 

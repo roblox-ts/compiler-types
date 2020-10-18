@@ -13,6 +13,7 @@ interface SymbolConstructor {
 	 * for-of statement.
 	 */
 	readonly iterator: symbol;
+	readonly asyncIterator: symbol;
 
 	/**
 	 * Returns a new unique Symbol value.
