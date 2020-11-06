@@ -3,7 +3,6 @@
 /// <reference path="callMacros.d.ts" />
 /// <reference path="Iterable.d.ts" />
 /// <reference path="Map.d.ts" />
-/// <reference path="Object.d.ts" />
 /// <reference path="Promise.d.ts" />
 /// <reference path="Set.d.ts" />
 /// <reference path="String.d.ts" />

@@ -17,17 +17,6 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	isEmpty(this: ReadonlyArray<any>): boolean;
 
 	/**
-	 * Returns a string representation of this data structure. Meant for debugging only.
-	 */
-	toString(this: ReadonlyArray<any>): string;
-
-	/**
-	 * Creates a new array and shallow copies `this` and the items into the new array, in that order.
-	 * @param items Additional items to add to the end of array1.
-	 */
-	concat(this: ReadonlyArray<defined>, ...items: Array<ReadonlyArray<T>>): Array<T>;
-
-	/**
 	 * Adds all the elements of an array separated by the specified separator string.
 	 * @param separator A string used to separate one element of an array from the next in the resulting String. If omitted, the array elements are separated with a comma.
 	 */
@@ -52,32 +41,11 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	move(this: Array<defined>, f: number, e: number, t: number, a2?: Array<T>): Array<T>;
 
 	/**
-	 * Shallow copies a section of this array selected from `begin` to `end` (`end` not included) where `begin` and `end` represent the index of items in that array.
-	 * @param start The beginning of the specified portion of the array.
-	 * @param end The end of the specified portion of the array.
-	 */
-	slice(this: ReadonlyArray<defined>, start?: number, end?: number): Array<T>;
-
-	/**
-	 * Returns whether an array includes a certain element.
-	 * @param searchElement The element to search for.
-	 * @param fromIndex The position in this array at which to begin searching for searchElement.
-	 */
-	includes(this: ReadonlyArray<defined>, searchElement: T, fromIndex?: number): boolean;
-
-	/**
 	 * Returns the index of the first occurrence of a value in an array, else returns -1.
 	 * @param searchElement The value to locate in the array.
 	 * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
 	 */
 	indexOf(this: ReadonlyArray<defined>, searchElement: T, fromIndex?: number): number;
-
-	/**
-	 * Returns the index of the last occurrence of a specified value in an array.
-	 * @param searchElement The value to locate in the array.
-	 * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index in the array.
-	 */
-	lastIndexOf(this: ReadonlyArray<defined>, searchElement: T, fromIndex?: number): number;
 
 	/**
 	 * Returns whether **all** the members of an array satisfy the specified test.
@@ -171,37 +139,6 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	): U;
 
 	/**
-	 * Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-	 * @param callbackfn A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array.
-	 * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-	 */
-	reduceRight(
-		this: ReadonlyArray<defined>,
-		callbackfn: (accumulator: T, currentValue: T, currentIndex: number, array: ReadonlyArray<T>) => T,
-	): T;
-
-	/**
-	 * Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-	 * @param callbackfn A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array.
-	 * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-	 */
-	reduceRight<U>(
-		this: ReadonlyArray<defined>,
-		callbackfn: (accumulator: U, currentValue: T, currentIndex: number, array: ReadonlyArray<T>) => U,
-		initialValue: U,
-	): U;
-
-	/**
-	 * Returns a copy of the array with elements in reverse order. The compiler will automatically optimize this away when used in-line in a for..of loop.
-	 */
-	reverse(this: ReadonlyArray<defined>): Array<T>;
-
-	/**
-	 * Returns an array of every index-value pair in this array. The compiler will automatically optimize this away when used in-line in a for..of loop.
-	 */
-	entries(this: ReadonlyArray<defined>): Array<[number, T]>;
-
-	/**
 	 * Returns the value of the first element in the array where predicate is true, and undefined
 	 * otherwise.
 	 * @param predicate find calls predicate once for each element of the array, in ascending
@@ -216,36 +153,6 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 		this: ReadonlyArray<defined>,
 		predicate: (value: T, index: number, obj: ReadonlyArray<T>) => boolean | undefined,
 	): T | undefined;
-
-	/**
-	 * Returns the index of the first element in the array that satisfies the provided testing function. Otherwise, it returns -1, indicating no element passed the test.
-	 * @param predicate findIndex calls predicate once for each element of the array, in ascending
-	 * order, until it finds one where predicate returns true. If such an element is found, find
-	 * immediately returns the index at which it was found. Otherwise, find returns -1.
-	 */
-	findIndex(
-		this: ReadonlyArray<defined>,
-		predicate: (value: T, index: number, obj: ReadonlyArray<T>) => boolean | undefined,
-	): number;
-
-	/**
-	 * Returns a shallow copy of the array
-	 */
-	copy(this: ReadonlyArray<defined>): Array<T>;
-
-	/**
-	 * Returns a deep copy of the array
-	 */
-	deepCopy(this: ReadonlyArray<defined>): Array<T>;
-
-	/**
-	 * Returns true if
-	 * - each member of `a` equals each member of `b`
-	 * - `b` has no members that do not exist in `a`.
-	 *
-	 * Searches recursively.
-	 */
-	deepEquals(this: ReadonlyArray<defined>, other: ReadonlyArray<defined>): boolean;
 }
 
 /**
@@ -270,33 +177,10 @@ interface Array<T> extends ReadonlyArray<T> {
 	shift(this: Array<defined>): T | undefined;
 
 	/**
-	 * Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
-	 * @param start The zero-based location in the array from which to start removing elements.
-	 * @param deleteCount The number of elements to remove.
-	 */
-	splice(this: Array<defined>, start: number, deleteCount?: number): Array<T>;
-
-	/**
-	 * Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
-	 * @param start The zero-based location in the array from which to start removing elements.
-	 * @param deleteCount The number of elements to remove.
-	 * @param items Elements to insert into the array in place of the deleted elements.
-	 */
-	splice(this: Array<defined>, start: number, deleteCount: number, ...items: Array<T>): Array<T>;
-
-	/**
 	 * Inserts new elements at the start of an array and returns the new length of the array.
 	 * @param items  Elements to insert at the start of the Array.
 	 */
 	unshift(this: Array<defined>, ...items: Array<T>): number;
-
-	/**
-	 * Shallow copies part of an array to another location in the same array and returns it, without modifying its size.
-	 * @param target Zero based index at which to copy the sequence to. If negative, target will be counted from the end. If target is at or greater than arr.length, nothing will be copied. If target is positioned after start, the copied sequence will be trimmed to fit arr.length.
-	 * @param start Zero based index at which to start copying elements from. If negative, start will be counted from the end. If start is omitted, copyWithin will copy from the start (defaults to 0).
-	 * @param end Zero based index at which to end copying elements from. copyWithin copies up to but not including end. If negative, end will be counted from the end. If end is omitted, copyWithin will copy until the end (default to arr.length).
-	 */
-	copyWithin(this: Array<defined>, target: number, start?: number, end?: number): this;
 
 	/**
 	 * Inserts `value` into the array at `index` and shifts array members forwards if needed.

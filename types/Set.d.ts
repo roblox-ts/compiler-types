@@ -8,11 +8,6 @@ interface ReadonlySet<T> extends Iterable<T> {
 	isEmpty(this: ReadonlySet<T>): boolean;
 
 	/**
-	 * Returns a string representation of this data structure.
-	 */
-	toString(this: ReadonlySet<T>): string;
-
-	/**
 	 * Performs the specified action for each (element / pair of elements) in the set
 	 * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time for each (element / pair of elements) in the array.
 	 */
@@ -24,45 +19,9 @@ interface ReadonlySet<T> extends Iterable<T> {
 	size(this: ReadonlySet<T>): number;
 
 	/**
-	 * Returns an array with all values of this set
-	 */
-	values(this: ReadonlySet<T>): Array<T>;
-
-	/**
 	 * Returns a boolean for whether the given key exists in the set
 	 */
 	has(this: ReadonlySet<T>, value: T): boolean;
-
-	/**
-	 * Returns a new set with every element that occurs at least once in either `this` or a given set
-	 */
-	union<U>(this: ReadonlySet<T>, set: ReadonlySet<U>): Set<T | U>;
-
-	/**
-	 * Returns a new set with every element that occurs in both `this` and a given set
-	 */
-	intersect<U>(this: ReadonlySet<T>, set: ReadonlySet<U>): Set<T | U>;
-
-	/**
-	 * Returns a new set which is the result of subtracting a given set from `this`
-	 */
-	difference<U>(this: ReadonlySet<T>, set: ReadonlySet<U>): Set<T | U>;
-
-	/**
-	 * Returns true if `this` and a given set have no elements in common, else false.
-	 */
-	isDisjointWith(this: ReadonlySet<T>, set: ReadonlySet<T>): boolean;
-
-	/**
-	 * Returns a boolean for whether `this` is a subset of a given set.
-	 *
-	 * Note: Every set is a subset of itself, so this will return true for identical sets.
-	 * A "proper subset" relationship can be checked via:
-	 * ```ts
-set1.isSubsetOf(set2) && !set2.isSubsetOf(set1)
-```
-	 */
-	isSubsetOf(this: ReadonlySet<T>, set: ReadonlySet<T>): boolean;
 }
 
 interface ReadonlySetConstructor {

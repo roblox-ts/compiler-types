@@ -29,11 +29,6 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 	isEmpty(this: ReadonlyMap<K, V>): boolean;
 
 	/**
-	 * Returns a string representation of this data structure.
-	 */
-	toString(this: ReadonlyMap<K, V>): string;
-
-	/**
 	 * Performs the specified action for each (element / pair of elements) in the Map
 	 * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time for each (element / pair of elements) in the array.
 	 */
@@ -45,11 +40,6 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 	size(this: ReadonlyMap<K, V>): number;
 
 	/**
-	 * Returns an array with all values of this Map
-	 */
-	values(this: ReadonlyMap<K, V>): Array<V>;
-
-	/**
 	 * Returns a boolean for whether the given key exists in the Map
 	 */
 	has(this: ReadonlyMap<K, V>, key: K): boolean;
@@ -58,16 +48,6 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 	 * Returns the value associated with the given key
 	 */
 	get(this: ReadonlyMap<K, V>, key: K): V | undefined;
-
-	/**
-	 * Returns an array of tuples for all members of this Map
-	 */
-	entries(this: ReadonlyMap<K, V>): Array<[K, V]>;
-
-	/**
-	 * Returns an array with all of this map's keys
-	 */
-	keys(this: ReadonlyMap<K, V>): Array<K>;
 }
 
 interface ReadonlyMapConstructor {
