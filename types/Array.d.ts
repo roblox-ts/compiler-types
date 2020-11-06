@@ -41,6 +41,13 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	move(this: Array<defined>, f: number, e: number, t: number, a2?: Array<T>): Array<T>;
 
 	/**
+	 * Returns whether an array includes a certain element.
+	 * @param searchElement The element to search for.
+	 * @param fromIndex The position in this array at which to begin searching for searchElement.
+	 */
+	includes(this: ReadonlyArray<defined>, searchElement: T, fromIndex?: number): boolean;
+
+	/**
 	 * Returns the index of the first occurrence of a value in an array, else returns -1.
 	 * @param searchElement The value to locate in the array.
 	 * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
