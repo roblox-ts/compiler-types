@@ -3,7 +3,6 @@
 /**
  * A Map object which cannot be written to. The Map object holds key-value pairs but doesn't remember the original insertion order of the keys (like JS would). Any value (both objects and primitive values) may be used as either a key or a value.
  * Maps are the best choice for dynamic indexing/newindexing, whereas Objects are better for explicit indexing.
- * @rbxts map
  * @example
  * // ReadonlyMaps are particularly useful for defining readonly-associations with non-numeric, non-string keys.
  * new ReadonlyMap<Enum.HumanoidRigType, () => void>([
@@ -58,7 +57,6 @@ declare const ReadonlyMap: ReadonlyMapConstructor;
 /**
  * The Map object holds key-value pairs but doesn't remember the original insertion order of the keys (like JS would). Any value (both objects and primitive values) may be used as either a key or a value.
  * Maps are the best choice for dynamic indexing/newindexing, whereas Objects are better for explicit indexing.
- * @rbxts map
  * @example
  * const playerData = new Map<Player, PlayerData>();
  *
@@ -105,10 +103,7 @@ interface MapConstructor {
 }
 declare const Map: MapConstructor;
 
-/**
- * A Map object with its `__mode` metamethod set to "k"
- * @rbxts map
- */
+/** A Map object with its `__mode` metamethod set to "k" */
 interface WeakMap<K extends object, V> extends Map<K, V> {}
 
 interface WeakMapConstructor {

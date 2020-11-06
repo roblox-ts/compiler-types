@@ -1,6 +1,5 @@
 /// <reference no-default-lib="true"/>
 
-/** @rbxts set */
 interface ReadonlySet<T> extends Iterable<T> {
 	/**
 	 * Returns true if empty, otherwise false.
@@ -29,7 +28,6 @@ interface ReadonlySetConstructor {
 }
 declare const ReadonlySet: ReadonlySetConstructor;
 
-/** @rbxts set */
 interface Set<T> extends ReadonlySet<T> {
 	/**
 	 * Adds a value to the set
@@ -54,10 +52,7 @@ interface SetConstructor {
 }
 declare const Set: SetConstructor;
 
-/**
- * A Set object with its `__mode` metamethod set to "k"
- * @rbxts set
- */
+/** A Set object with its `__mode` metamethod set to "k" */
 interface WeakSet<T extends object> extends Set<T> {}
 
 interface WeakSetConstructor {

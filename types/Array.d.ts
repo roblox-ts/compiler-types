@@ -1,6 +1,5 @@
 /// <reference no-default-lib="true"/>
 
-/** @rbxts array */
 interface ArrayLike<T> {
 	/**
 	 * Gets the length of the array. This is one higher than the highest index defined in an array.
@@ -162,10 +161,6 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	): T | undefined;
 }
 
-/**
- * An Array object
- * @rbxts array
- */
 interface Array<T> extends ReadonlyArray<T> {
 	/**
 	 * Appends new elements to an array and returns the new length of the array.
@@ -236,10 +231,8 @@ interface ArrayConstructor {
 
 declare const Array: ArrayConstructor;
 
-/** @rbxts array */
 interface TemplateStringsArray extends Array<string> {}
 
-/** @rbxts array */
 type ReadVoxelsArray<T> = Array<Array<Array<T>>> & {
 	Size: Vector3;
 };

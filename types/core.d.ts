@@ -140,10 +140,10 @@ type PartialInstance<T extends Instance> = Partial<Pick<T, WritableInstancePrope
 
 // temporary backwards compatibility:
 
-/** @rbxts deprecated */
+/** @deprecated */
 type GetProperties<T extends Instance> = InstanceProperties<T>;
 
-/** @rbxts deprecated */
+/** @deprecated */
 type GetWritableProperties<T extends Instance> = WritableInstanceProperties<T>;
 
 /** Returns a given objects parameters in a tuple. Defaults to `[]` */
