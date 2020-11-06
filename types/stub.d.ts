@@ -1,6 +1,7 @@
 /// <reference no-default-lib="true"/>
 
-// stub interfaces
+// stub interfaces, this file is not distributed
+
 interface Instance {
 	ClassName: string;
 }
