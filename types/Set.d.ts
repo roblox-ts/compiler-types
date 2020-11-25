@@ -2,6 +2,13 @@
 
 interface ReadonlySet<T> extends Iterable<T> {
 	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 */
+	readonly _internal: unique symbol;
+
+	/**
 	 * Returns true if empty, otherwise false.
 	 */
 	isEmpty(this: ReadonlySet<T>): boolean;

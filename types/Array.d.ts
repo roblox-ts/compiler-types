@@ -2,6 +2,13 @@
 
 interface ArrayLike<T> {
 	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 */
+	readonly _internal: unique symbol;
+
+	/**
 	 * Gets the length of the array. This is one higher than the highest index defined in an array.
 	 */
 	size(): number;
