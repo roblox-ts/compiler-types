@@ -167,6 +167,17 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 		this: ReadonlyArray<defined>,
 		predicate: (value: T, index: number, obj: ReadonlyArray<T>) => boolean | undefined,
 	): T | undefined;
+
+	/**
+	 * Returns the index of the first element in the array that satisfies the provided testing function. Otherwise, it returns -1, indicating no element passed the test.
+	 * @param predicate findIndex calls predicate once for each element of the array, in ascending
+	 * order, until it finds one where predicate returns true. If such an element is found, find
+	 * immediately returns the index at which it was found. Otherwise, find returns -1.
+	 */
+	findIndex(
+		this: ReadonlyArray<defined>,
+		predicate: (value: T, index: number, obj: ReadonlyArray<T>) => boolean | undefined,
+	): number;
 }
 
 interface Array<T> extends ReadonlyArray<T> {
