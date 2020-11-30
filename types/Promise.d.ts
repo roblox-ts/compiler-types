@@ -3,6 +3,20 @@
 // Based on roblox-lua-promise v3.0.1
 // https://eryn.io/roblox-lua-promise/
 
+interface PromiseLike<T> {
+	/**
+	 * Chains onto an existing Promise and returns a new Promise.
+	 * > Within the failure handler, you should never assume that the rejection value is a string. Some rejections within the Promise library are represented by Error objects. If you want to treat it as a string for debugging, you should call `tostring` on it first.
+	 *
+	 * Return a Promise from the success or failure handler and it will be chained onto.
+	 */
+	then<TResult1 = T, TResult2 = never>(
+		this: Promise<T>,
+		onResolved?: ((value: T) => TResult1 | Promise<TResult1>) | void,
+		onRejected?: ((reason: any) => TResult2 | Promise<TResult2>) | void,
+	): Promise<TResult1 | TResult2>;
+}
+
 /**
  * Represents the completion of an asynchronous operation
  */
