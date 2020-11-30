@@ -7,7 +7,7 @@ interface ReadonlySet<T> extends Iterable<T> {
 	 * This field exists to force TypeScript to recognize this as a nominal type
 	 * @deprecated
 	 */
-	readonly _internal: unique symbol;
+	readonly _setBrand: unique symbol;
 
 	/**
 	 * Returns true if empty, otherwise false.
