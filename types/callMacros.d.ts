@@ -1,5 +1,8 @@
 /// <reference no-default-lib="true"/>
 
+/** Throws an error if the provided value is false or nil. */
+declare function assert<T>(condition: T, message?: string): asserts condition;
+
 /** Returns the type of the given object as a string. This function works similarly to Lua’s native type function, with the exceptions that Roblox-defined data types like Vector3 and CFrame return their respective data types as strings. */
 declare function typeOf(value: any): keyof CheckableTypes;
 
