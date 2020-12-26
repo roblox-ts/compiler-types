@@ -116,7 +116,7 @@ type OriginalInstanceType<T extends Instance> = T extends any
 /** Given an Instance `T`, returns a unioned type of all property names, except "ClassName". */
 type InstanceProperties<I extends Instance> = OriginalInstanceType<I> extends infer T
 	? {
-			[K in keyof T]-?: K extends "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
+			[K in keyof T]-?: K extends "ClassName" | "Changed" | "BreakJoints" | "MakeJoints" | "GetPropertyChangedSignal"
 				? never
 				: T[K] extends RBXScriptSignal | Callback
 				? never
