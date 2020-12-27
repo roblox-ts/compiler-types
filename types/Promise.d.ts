@@ -1,7 +1,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference types="@rbxts/types"/>
 
-// Based on roblox-lua-promise v3.0.1
+// Based on roblox-lua-promise v3.1.0
 // https://eryn.io/roblox-lua-promise/
 
 interface PromiseLike<T> {
@@ -563,6 +563,32 @@ interface PromiseConstructor {
 
 	/** Checks whether the given object is a Promise via duck typing. This only checks if the object is a table and has an `andThen` method. */
 	is: (object: unknown) => object is Promise<unknown>;
+
+	/**
+	 * Folds an array of values or promises into a single value. The array is traversed sequentially.
+	 *
+	 * The reducer function can return a promise or value directly. Each iteration receives the resolved value from the previous, and the first receives your defined initial value.
+	 *
+	 * The folding will stop at the first rejection encountered.
+	 * ```lua
+	 * local basket = {"blueberry", "melon", "pear", "melon"}
+	 * Promise.fold(basket, function(cost, fruit)
+	 *   if fruit == "blueberry" then
+	 *     return cost -- blueberries are free!
+	 *   else
+	 *     -- call a function that returns a promise with the fruit price
+	 *     return fetchPrice(fruit):andThen(function(fruitCost)
+	 *       return cost + fruitCost
+	 *     end)
+	 *   end
+	 * end, 0)
+	 * ```
+	 */
+	fold: <T, U>(
+		list: Array<T | Promise<T>>,
+		reducer: (accumulator: U, value: T, index: number) => U | Promise<U>,
+		initialValue: U,
+	) => Promise<U>;
 }
 
 declare namespace Promise {
