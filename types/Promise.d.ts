@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference types="@rbxts/types"/>
 
 // Based on roblox-lua-promise v3.0.1
 // https://eryn.io/roblox-lua-promise/

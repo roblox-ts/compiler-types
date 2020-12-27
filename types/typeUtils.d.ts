@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference types="@rbxts/types"/>
 
 /** Placeholder that sometimes helps force TS to display what you want it to. */
 type _<T> = T;

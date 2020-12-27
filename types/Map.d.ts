@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference types="@rbxts/types"/>
 
 /**
  * A Map object which cannot be written to. The Map object holds key-value pairs but doesn't remember the original insertion order of the keys (like JS would). Any value (both objects and primitive values) may be used as either a key or a value.

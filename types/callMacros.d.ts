@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference types="@rbxts/types"/>
 
 /** Throws an error if the provided value is false or nil. */
 declare function assert<T>(condition: T, message?: string): asserts condition;

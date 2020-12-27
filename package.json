@@ -14,6 +14,7 @@
     "!types/stub.d.ts"
   ],
   "devDependencies": {
+    "@rbxts/types": "^1.0.431",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.11.0",

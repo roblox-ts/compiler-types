@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference types="@rbxts/types"/>
 
 type IteratorResult<Yields, Returns = void> = IteratorYieldResult<Yields> | IteratorReturnResult<Returns>;
 
