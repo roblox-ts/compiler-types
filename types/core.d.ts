@@ -2,6 +2,7 @@
 /// <reference types="@rbxts/types"/>
 /// <reference path="Array.d.ts" />
 /// <reference path="callMacros.d.ts" />
+/// <reference path="idMacros.d.ts" />
 /// <reference path="Iterable.d.ts" />
 /// <reference path="Map.d.ts" />
 /// <reference path="Promise.d.ts" />

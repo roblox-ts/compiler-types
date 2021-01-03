@@ -68,8 +68,3 @@ declare function classIs<
  * }
  */
 declare function identity<T>(arg: T): T;
-
-/**
- * This variable will be automatically replaced by the "version" string from the package.json file
- */
-declare const PKG_VERSION: string;
