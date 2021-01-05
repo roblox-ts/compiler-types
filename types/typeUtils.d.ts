@@ -33,10 +33,16 @@ type Exclude<T, U> = T extends U ? never : T;
 type Extract<T, U> = T extends U ? T : never;
 
 /** Returns a union of all the keys of T whose values extend from U */
-type FilterKeys<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
+type ExtractKeys<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
 
 /** Returns a new object type of all the keys of T whose values extend from U */
-type FilterMembers<T, U> = Pick<T, FilterKeys<T, U>>;
+type ExtractMembers<T, U> = Pick<T, ExtractKeys<T, U>>;
+
+/** Returns a union of all the keys of T whose values do not extend from U */
+type ExcludeKeys<T, U> = { [K in keyof T]: T[K] extends U ? never : K }[keyof T];
+
+/** Returns a new object type of all the keys of T whose values do not extend from U */
+type ExcludeMembers<T, U> = Pick<T, ExcludeKeys<T, U>>;
 
 /** Exclude null and undefined from T */
 type NonNullable<T> = unknown extends T ? defined : T extends null | undefined ? never : T;
