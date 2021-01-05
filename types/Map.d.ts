@@ -29,7 +29,7 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 	 * This field exists to force TypeScript to recognize this as a nominal type
 	 * @deprecated
 	 */
-	readonly _mapBrand: unique symbol;
+	readonly _nominal_Map: unique symbol;
 
 	/**
 	 * Returns true if empty, otherwise false.

@@ -8,7 +8,7 @@ interface ArrayLike<T> {
 	 * This field exists to force TypeScript to recognize this as a nominal type
 	 * @deprecated
 	 */
-	readonly _arrayBrand: unique symbol;
+	readonly _nominal_Array: unique symbol;
 
 	/**
 	 * Gets the length of the array. This is one higher than the highest index defined in an array.
