@@ -1,5 +1,6 @@
 /// <reference no-default-lib="true"/>
 /// <reference types="@rbxts/types"/>
+/// <reference path="EslintIgnore.d.ts" />
 
 /** Placeholder that sometimes helps force TS to display what you want it to. */
 type _<T> = T;
@@ -96,3 +97,5 @@ type InstanceProperties<T extends Instance> = Pick<T, InstancePropertyNames<T>>;
 
 /** Given an Instance `T`, returns an object with readonly fields, methods, and events filtered out. */
 type WritableInstanceProperties<T extends Instance> = WritableProperties<InstanceProperties<T>>;
+
+type FilterNominalTags<T> = Pick<T, NonNominalKeys<T>>;
