@@ -32,6 +32,12 @@ type Exclude<T, U> = T extends U ? never : T;
 /** Extract from T those types that are assignable to U */
 type Extract<T, U> = T extends U ? T : never;
 
+/** Returns a union of all the keys of T whose values extend from U */
+type FilterKeys<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
+
+/** Returns a new object type of all the keys of T whose values extend from U */
+type FilterMembers<T, U> = Pick<T, FilterKeys<T, U>>;
+
 /** Exclude null and undefined from T */
 type NonNullable<T> = unknown extends T ? defined : T extends null | undefined ? never : T;
 
@@ -50,7 +56,7 @@ type InstanceType<T extends new (...args: Array<any>) => any> = T extends new (.
 	: any;
 
 /** Combines a series of intersections into one object, e.g. { x: number } & { y: number } becomes { x: number, y: number } */
-type Reconstruct<T> = _<{ [k in keyof T]: T[k] }>;
+type Reconstruct<T> = _<{ [K in keyof T]: T[K] }>;
 
 /** Converts a series of object unions to a series of intersections, e.g. A | B becomes A & B */
 type UnionToIntersection<U> = (U extends object ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
@@ -82,15 +88,10 @@ type WritablePropertyNames<T> = {
 type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
 
 /** Given an Instance `T`, returns a unioned type of all property names, except "ClassName". */
-type InstancePropertyNames<I extends Instance> = I extends infer T
-	? {
-			[K in keyof T]-?: K extends "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
-				? never
-				: T[K] extends RBXScriptSignal | Callback
-				? never
-				: K;
-	  }[keyof T]
-	: never;
+type InstancePropertyNames<T extends Instance> = Exclude<
+	keyof T,
+	FilterKeys<T, RBXScriptSignal | Callback> | "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
+>;
 
 /** Given an Instance `T`, returns an object with methods and events filtered out. */
 type InstanceProperties<T extends Instance> = Pick<T, InstancePropertyNames<T>>;
