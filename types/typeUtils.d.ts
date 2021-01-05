@@ -63,3 +63,36 @@ type OmitThisParameter<T> = unknown extends ThisParameterType<T>
 	: T extends (...args: infer A) => infer R
 	? (...args: A) => R
 	: T;
+
+/** Given an object `T`, returns a unioned type of all non-readonly property names. */
+type WritablePropertyNames<T> = {
+	[K in keyof T]-?: T[K] extends Callback
+		? never
+		: (<F>() => F extends { [Q in K]: T[K] } ? 1 : 2) extends <F>() => F extends {
+				-readonly [Q in K]: T[K];
+		  }
+				? 1
+				: 2
+		? K
+		: never;
+}[keyof T];
+
+/** Given an object `T`, returns an object with readonly fields filtered out. */
+type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
+
+/** Given an Instance `T`, returns a unioned type of all property names, except "ClassName". */
+type InstancePropertyNames<I extends Instance> = I extends infer T
+	? {
+			[K in keyof T]-?: K extends "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
+				? never
+				: T[K] extends RBXScriptSignal | Callback
+				? never
+				: K;
+	  }[keyof T]
+	: never;
+
+/** Given an Instance `T`, returns an object with methods and events filtered out. */
+type InstanceProperties<T extends Instance> = Pick<T, InstancePropertyNames<T>>;
+
+/** Given an Instance `T`, returns an object with readonly fields, methods, and events filtered out. */
+type WritableInstanceProperties<T extends Instance> = WritableProperties<InstanceProperties<T>>;
