@@ -94,7 +94,10 @@ type WritablePropertyNames<T> = {
 type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
 
 /** Given an Instance `T`, returns a unioned type of all property names. */
-type InstancePropertyNames<T extends Instance> = ExcludeKeys<T, RBXScriptSignal | Callback | symbol>;
+type InstancePropertyNames<T extends Instance> = Exclude<
+	ExcludeKeys<T, RBXScriptSignal | Callback | symbol>,
+	"Changed"
+>;
 
 /** Given an Instance `T`, returns a unioned type of all method names. */
 type InstanceMethodNames<T extends Instance> = ExtractKeys<T, Callback>;
