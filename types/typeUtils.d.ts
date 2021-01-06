@@ -96,7 +96,7 @@ type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
 /** Given an Instance `T`, returns a unioned type of all property names, except "ClassName". */
 type InstancePropertyNames<T extends Instance> = Exclude<
 	keyof T,
-	ExtractKeys<T, RBXScriptSignal | Callback> | "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
+	ExtractKeys<T, RBXScriptSignal | Callback | symbol> | "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
 >;
 
 /** Given an Instance `T`, returns an object with methods and events filtered out. */
