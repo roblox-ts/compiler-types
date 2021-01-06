@@ -93,16 +93,26 @@ type WritablePropertyNames<T> = {
 /** Given an object `T`, returns an object with readonly fields filtered out. */
 type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
 
-/** Given an Instance `T`, returns a unioned type of all property names, except "ClassName". */
-type InstancePropertyNames<T extends Instance> = Exclude<
-	keyof T,
-	ExtractKeys<T, RBXScriptSignal | Callback | symbol> | "ClassName" | "Changed" | "BreakJoints" | "MakeJoints"
->;
+/** Given an Instance `T`, returns a unioned type of all property names. */
+type InstancePropertyNames<T extends Instance> = ExcludeKeys<T, RBXScriptSignal | Callback | symbol>;
 
-/** Given an Instance `T`, returns an object with methods and events filtered out. */
+/** Given an Instance `T`, returns a unioned type of all method names. */
+type InstanceMethodNames<T extends Instance> = ExtractKeys<T, Callback>;
+
+/** Given an Instance `T`, returns a unioned type of all event names. */
+type InstanceEventNames<T extends Instance> = ExtractKeys<T, RBXScriptSignal>;
+
+/** Given an Instance `T`, returns an object with only properties. */
 type InstanceProperties<T extends Instance> = Pick<T, InstancePropertyNames<T>>;
+
+/** Given an Instance `T`, returns an object with only methods. */
+type InstanceMethods<T extends Instance> = Pick<T, InstanceMethodNames<T>>;
+
+/** Given an Instance `T`, returns an object with only events. */
+type InstanceEvents<T extends Instance> = Pick<T, InstanceEventNames<T>>;
 
 /** Given an Instance `T`, returns an object with readonly fields, methods, and events filtered out. */
 type WritableInstanceProperties<T extends Instance> = WritableProperties<InstanceProperties<T>>;
 
-type FilterNominalTags<T> = Pick<T, NonNominalKeys<T>>;
+/** Returns a new object type of all the keys of T which do not start with `_nominal_` */
+type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;
