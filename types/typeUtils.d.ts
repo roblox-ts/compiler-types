@@ -1,5 +1,6 @@
 /// <reference no-default-lib="true"/>
 /// <reference types="@rbxts/types"/>
+/// <reference path="EslintIgnore.d.ts" />
 
 /** Placeholder that sometimes helps force TS to display what you want it to. */
 type _<T> = T;
@@ -31,6 +32,18 @@ type Exclude<T, U> = T extends U ? never : T;
 /** Extract from T those types that are assignable to U */
 type Extract<T, U> = T extends U ? T : never;
 
+/** Returns a union of all the keys of T whose values extend from U */
+type ExtractKeys<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
+
+/** Returns a new object type of all the keys of T whose values extend from U */
+type ExtractMembers<T, U> = Pick<T, ExtractKeys<T, U>>;
+
+/** Returns a union of all the keys of T whose values do not extend from U */
+type ExcludeKeys<T, U> = { [K in keyof T]: T[K] extends U ? never : K }[keyof T];
+
+/** Returns a new object type of all the keys of T whose values do not extend from U */
+type ExcludeMembers<T, U> = Pick<T, ExcludeKeys<T, U>>;
+
 /** Exclude null and undefined from T */
 type NonNullable<T> = unknown extends T ? defined : T extends null | undefined ? never : T;
 
@@ -49,7 +62,7 @@ type InstanceType<T extends new (...args: Array<any>) => any> = T extends new (.
 	: any;
 
 /** Combines a series of intersections into one object, e.g. { x: number } & { y: number } becomes { x: number, y: number } */
-type Reconstruct<T> = _<{ [k in keyof T]: T[k] }>;
+type Reconstruct<T> = _<{ [K in keyof T]: T[K] }>;
 
 /** Converts a series of object unions to a series of intersections, e.g. A | B becomes A & B */
 type UnionToIntersection<U> = (U extends object ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
@@ -63,3 +76,43 @@ type OmitThisParameter<T> = unknown extends ThisParameterType<T>
 	: T extends (...args: infer A) => infer R
 	? (...args: A) => R
 	: T;
+
+/** Given an object `T`, returns a unioned type of all non-readonly property names. */
+type WritablePropertyNames<T> = {
+	[K in keyof T]-?: T[K] extends Callback
+		? never
+		: (<F>() => F extends { [Q in K]: T[K] } ? 1 : 2) extends <F>() => F extends {
+				-readonly [Q in K]: T[K];
+		  }
+				? 1
+				: 2
+		? K
+		: never;
+}[keyof T];
+
+/** Given an object `T`, returns an object with readonly fields filtered out. */
+type WritableProperties<T> = Pick<T, WritablePropertyNames<T>>;
+
+/** Given an Instance `T`, returns a unioned type of all property names. */
+type InstancePropertyNames<T extends Instance> = ExcludeKeys<T, RBXScriptSignal | Callback | symbol>;
+
+/** Given an Instance `T`, returns a unioned type of all method names. */
+type InstanceMethodNames<T extends Instance> = ExtractKeys<T, Callback>;
+
+/** Given an Instance `T`, returns a unioned type of all event names. */
+type InstanceEventNames<T extends Instance> = ExtractKeys<T, RBXScriptSignal>;
+
+/** Given an Instance `T`, returns an object with only properties. */
+type InstanceProperties<T extends Instance> = Pick<T, InstancePropertyNames<T>>;
+
+/** Given an Instance `T`, returns an object with only methods. */
+type InstanceMethods<T extends Instance> = Pick<T, InstanceMethodNames<T>>;
+
+/** Given an Instance `T`, returns an object with only events. */
+type InstanceEvents<T extends Instance> = Pick<T, InstanceEventNames<T>>;
+
+/** Given an Instance `T`, returns an object with readonly fields, methods, and events filtered out. */
+type WritableInstanceProperties<T extends Instance> = WritableProperties<InstanceProperties<T>>;
+
+/** Returns a new object type of all the keys of T which do not start with `_nominal_` */
+type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;
