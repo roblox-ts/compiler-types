@@ -65,7 +65,7 @@ type InstanceType<T extends new (...args: Array<any>) => any> = T extends new (.
 type Reconstruct<T> = _<{ [K in keyof T]: T[K] }>;
 
 /** Converts a series of object unions to a series of intersections, e.g. A | B becomes A & B */
-type UnionToIntersection<U> = (U extends object ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
+type UnionToIntersection<T> = (T extends object ? (k: T) => void : never) extends (k: infer U) => void ? U : never;
 
 /** Extracts the type of the 'this' parameter of a function type, or 'unknown' if the function type has no 'this' parameter. */
 type ThisParameterType<T> = T extends (this: infer U, ...args: Array<any>) => any ? U : unknown;
