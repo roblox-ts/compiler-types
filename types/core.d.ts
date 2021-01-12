@@ -71,6 +71,12 @@ interface RegExp {}
  * @deprecated
  */
 interface Function {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This type only exists because TypeScript requires it!
+	 * @deprecated
+	 */
 	prototype: never;
 }
 
