@@ -27,7 +27,9 @@ interface Boolean {}
 interface IArguments {}
 
 /**
- * **DO NOT USE!** This type only exists because TypeScript requires it!
+ * **DO NOT USE!**
+ *
+ * This type only exists because TypeScript requires it!
  *
  * **Use `number` instead!**
  * @deprecated
@@ -35,9 +37,11 @@ interface IArguments {}
 interface Number {}
 
 /**
- * **DO NOT USE!** This type only exists because TypeScript requires it!
+ * **DO NOT USE!**
  *
- * **Use `number` instead!**
+ * This type only exists because TypeScript requires it!
+ *
+ * **Use `object` instead!**
  * @deprecated
  */
 interface Object {}
@@ -55,7 +59,7 @@ interface RegExp {}
  *
  * This type only exists because TypeScript requires it!
  *
- * **Use the arrow function form instead!**
+ * **Use `Callback` instead!**
  *
  * For example,`(a: string, b: number) => boolean` represents a function that takes a `string` and a `number` and
  * returns a `boolean`.
@@ -73,6 +77,8 @@ interface Function {
 /**
  * **DO NOT USE!**
  *
+ * **Use `Callback` instead!**
+ *
  * This type only exists because TypeScript requires it!
  * @deprecated
  */
@@ -80,6 +86,8 @@ interface CallableFunction extends Function {}
 
 /**
  * **DO NOT USE!**
+ *
+ * **Use `Callback` instead!**
  *
  * This type only exists because TypeScript requires it!
  * @deprecated
