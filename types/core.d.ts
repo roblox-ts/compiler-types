@@ -32,7 +32,6 @@ interface IArguments {}
  * This type only exists because TypeScript requires it!
  *
  * **Use `number` instead!**
- * @deprecated
  */
 interface Number {}
 
