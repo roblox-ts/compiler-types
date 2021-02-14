@@ -227,6 +227,11 @@ interface Array<T> extends ReadonlyArray<T> {
 	 */
 	sort(this: Array<defined>, compareFunction?: (a: T, b: T) => boolean): Array<T>;
 
+	/**
+	 * Deletes all values in the Array
+	 */
+	clear(this: Array<T>): void;
+
 	[n: number]: T;
 }
 
