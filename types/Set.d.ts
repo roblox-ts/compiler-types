@@ -33,7 +33,8 @@ interface ReadonlySet<T> extends Iterable<T> {
 }
 
 interface ReadonlySetConstructor {
-	new <T>(values?: ReadonlyArray<T>): ReadonlySet<T>;
+	new <T>(): ReadonlySet<T>;
+	new <T>(values: ReadonlyArray<T>): ReadonlySet<T>;
 }
 declare const ReadonlySet: ReadonlySetConstructor;
 
@@ -57,7 +58,8 @@ interface Set<T> extends ReadonlySet<T> {
 }
 
 interface SetConstructor {
-	new <T>(values?: ReadonlyArray<T>): Set<T>;
+	new <T>(): Set<T>;
+	new <T>(values: ReadonlyArray<T>): Set<T>;
 }
 declare const Set: SetConstructor;
 
@@ -65,6 +67,7 @@ declare const Set: SetConstructor;
 interface WeakSet<T extends object> extends Set<T> {}
 
 interface WeakSetConstructor {
-	new <T extends object>(values?: ReadonlyArray<T>): WeakSet<T>;
+	new <T extends object>(): WeakSet<T>;
+	new <T extends object>(values: ReadonlyArray<T>): WeakSet<T>;
 }
 declare const WeakSet: WeakSetConstructor;

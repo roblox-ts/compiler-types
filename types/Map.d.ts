@@ -59,7 +59,8 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 }
 
 interface ReadonlyMapConstructor {
-	new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
+	new <K, V>(): ReadonlyMap<K, V>;
+	new <K, V>(entries: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
 }
 declare const ReadonlyMap: ReadonlyMapConstructor;
 
@@ -108,7 +109,8 @@ interface Map<K, V> extends ReadonlyMap<K, V> {
 }
 
 interface MapConstructor {
-	new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): Map<K, V>;
+	new <K, V>(): Map<K, V>;
+	new <K, V>(entries: ReadonlyArray<readonly [K, V]>): Map<K, V>;
 }
 declare const Map: MapConstructor;
 
@@ -116,6 +118,7 @@ declare const Map: MapConstructor;
 interface WeakMap<K extends object, V> extends Map<K, V> {}
 
 interface WeakMapConstructor {
-	new <K extends object, V>(entries?: ReadonlyArray<readonly [K, V]>): WeakMap<K, V>;
+	new <K extends object, V>(): WeakMap<K, V>;
+	new <K extends object, V>(entries: ReadonlyArray<readonly [K, V]>): WeakMap<K, V>;
 }
 declare const WeakMap: WeakMapConstructor;

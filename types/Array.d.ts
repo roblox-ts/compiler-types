@@ -244,9 +244,9 @@ interface ArrayConstructor {
 	 * This is the same as `table.create` in Lua.
 	 *
 	 * @param length The length of the array to allocate
-	 * @param value The value that the array will be filled with (amount based on `length`) (defaults to `nil`)
+	 * @param value The value that the array will be filled with (amount based on `length`)
 	 */
-	new <T>(length: number, value?: T): Array<T>;
+	new <T>(length: number, value: T): Array<T>;
 }
 
 declare const Array: ArrayConstructor;
