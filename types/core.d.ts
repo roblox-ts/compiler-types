@@ -108,4 +108,12 @@ interface ThisType<T> {}
 /** A function type which is assignable to any other function type (and any function is assignable to). */
 type Callback = (...args: Array<any>) => any;
 
-type LuaTuple<T extends Array<any>> = T & { readonly LUA_TUPLE: never };
+type LuaTuple<T extends Array<any>> = T & {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @deprecated
+	 */
+	readonly _nominal_LuaTuple: unique symbol;
+};
