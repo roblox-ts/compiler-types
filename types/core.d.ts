@@ -113,6 +113,7 @@ type LuaTuple<T extends Array<any>> = T & {
 	 * **DO NOT USE!**
 	 *
 	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
 	 * @deprecated
 	 */
 	readonly _nominal_LuaTuple: unique symbol;
