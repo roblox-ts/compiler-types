@@ -1,6 +1,5 @@
 /// <reference no-default-lib="true"/>
 /// <reference types="@rbxts/types"/>
-/// <reference path="EslintIgnore.d.ts" />
 
 /** Placeholder that sometimes helps force TS to display what you want it to. */
 type _<T> = T;
@@ -116,6 +115,11 @@ type InstanceEvents<T extends Instance> = Pick<T, InstanceEventNames<T>>;
 
 /** Given an Instance `T`, returns an object with readonly fields, methods, and events filtered out. */
 type WritableInstanceProperties<T extends Instance> = WritableProperties<InstanceProperties<T>>;
+
+/** Returns a union of all the keys of T which do not start with `_nominal_` */
+type ExcludeNominalKeys<T> = {
+	[K in keyof T]: K extends `_nominal_${infer _U}` ? never : K;
+}[keyof T];
 
 /** Returns a new object type of all the keys of T which do not start with `_nominal_` */
 type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;

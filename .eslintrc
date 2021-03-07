@@ -4,18 +4,11 @@
 		"jsx": true,
 		"useJSXTextNode": true,
 		"ecmaVersion": 2020,
-		"sourceType": "module"
+		"sourceType": "module",
+		"project": "./types/tsconfig.json"
 	},
-	"plugins": [
-		"@typescript-eslint",
-		"@typescript-eslint/eslint-plugin",
-		"prettier"
-	],
-	"extends": [
-		"plugin:@typescript-eslint/recommended",
-		"prettier/@typescript-eslint",
-		"plugin:prettier/recommended"
-	],
+	"plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "prettier"],
+	"extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
 	"rules": {
 		"prettier/prettier": [
 			"warn",
