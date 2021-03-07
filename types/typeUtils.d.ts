@@ -123,3 +123,6 @@ type ExcludeNominalKeys<T> = {
 
 /** Returns a new object type of all the keys of T which do not start with `_nominal_` */
 type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;
+
+/** Unwraps a Promise<T> */
+type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
