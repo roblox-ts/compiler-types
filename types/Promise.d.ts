@@ -207,7 +207,7 @@ interface Promise<T> {
 	 * })
 	 * ```
 	 */
-	timeout(this: Promise<T>, seconds: number, rejectionValue?: T): Promise<T>;
+	timeout(this: Promise<T>, seconds: number, rejectionValue?: any): Promise<T>;
 
 	/**
 	 * Cancels this promise, preventing the promise from resolving or rejecting. Does not do anything if the promise is already settled.
@@ -232,7 +232,7 @@ interface Promise<T> {
 	 * ```
 	 * If this Promise is still running, Rejected, or Cancelled, the Promise returned from `:now()` will reject with the `rejectionValue` if passed, otherwise with a `Promise.Error(Promise.Error.Kind.NotResolvedInTime)`. This can be checked with `Error.isKind`.
 	 */
-	now(this: Promise<T>, rejectionValue?: T): Promise<T>;
+	now(this: Promise<T>, rejectionValue?: any): Promise<T>;
 
 	/**
 	 * Yields the current thread until the given Promise completes. Returns true if the Promise resolved, followed by the values that the promise resolved or rejected with.
