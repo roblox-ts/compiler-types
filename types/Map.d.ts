@@ -39,7 +39,8 @@ interface ReadonlyMap<K, V> extends Iterable<[K, V]> {
 
 	/**
 	 * Performs the specified action for each (element / pair of elements) in the Map
-	 * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time for each (element / pair of elements) in the array.
+	 * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time
+	 * for each (element / pair of elements) in the array.
 	 */
 	forEach(this: ReadonlyMap<K, V>, callbackfn: (value: V, key: K, self: this) => void): void;
 

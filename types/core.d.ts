@@ -12,7 +12,9 @@
 /// <reference path="typeUtils.d.ts" />
 
 /**
- * **DO NOT USE!** This type only exists because TypeScript requires it!
+ * **DO NOT USE!**
+ *
+ * This type only exists because TypeScript requires it!
  *
  * **Use `boolean` instead!**
  */
