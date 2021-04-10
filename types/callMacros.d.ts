@@ -10,12 +10,13 @@ declare function typeOf(value: any): keyof CheckableTypes;
 /**
  * Returns true if `typeof(value) == type`, otherwise false.
  * This function allows for type narrowing. i.e.
-```
-// v is unknown
-if (typeIs(v, "Vector3")) {
-	print(v.X, v.Y, v.Z);
-}
-```
+ * ```
+ * // v is unknown
+ * if (typeIs(v, "Vector3")) {
+ * 	// v is a Vector3
+ * 	print(v.X, v.Y, v.Z);
+ * }
+ * ```
  **/
 declare function typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
 
