@@ -22,6 +22,7 @@ interface Boolean {}
  * **DO NOT USE!**
  *
  * This type only exists because TypeScript requires it!
+ * @hidden
  * @deprecated
  */
 interface IArguments {}
@@ -41,6 +42,7 @@ interface Number {}
  * This type only exists because TypeScript requires it!
  *
  * **Use `object` instead!**
+ * @hidden
  * @deprecated
  */
 interface Object {}
@@ -49,6 +51,7 @@ interface Object {}
  * **DO NOT USE!**
  *
  * This type only exists because TypeScript requires it!
+ * @hidden
  * @deprecated
  */
 interface RegExp {}
@@ -67,6 +70,7 @@ interface RegExp {}
  * the return type.
  *
  * You can use `void` as a return type for functions that do not return anything: `() => void`
+ * @hidden
  * @deprecated
  */
 interface Function {
@@ -74,6 +78,7 @@ interface Function {
 	 * **DO NOT USE!**
 	 *
 	 * This type only exists because TypeScript requires it!
+	 * @hidden
 	 * @deprecated
 	 */
 	prototype: never;
@@ -85,6 +90,7 @@ interface Function {
  * **Use `Callback` instead!**
  *
  * This type only exists because TypeScript requires it!
+ * @hidden
  * @deprecated
  */
 interface CallableFunction extends Function {}
@@ -95,6 +101,7 @@ interface CallableFunction extends Function {}
  * **Use `Callback` instead!**
  *
  * This type only exists because TypeScript requires it!
+ * @hidden
  * @deprecated
  */
 interface NewableFunction extends Function {}
