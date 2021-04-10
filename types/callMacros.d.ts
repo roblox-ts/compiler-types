@@ -30,20 +30,7 @@ declare function opcall<T extends Array<any>, U>(
 ): { success: true; value: U } | { success: false; error: string };
 
 /**
- * Returns true if `instance.ClassName == Q`, otherwise false.
- * This function allows for ClassName narrowing. i.e.
- * @example
- * if (classIs(o, "LocalScript")) {
- * // o is a LocalScript
- * }
- * if (classIs(o, "Script")) {
- * // o is a Script & { ClassName: "Script" }
- * // Notice how it specifies the ClassName property here.
- * // This is because a `LocalScript` is-a `Script`, but `o` refers to
- * // an instance for which `ClassName` is "Script"
- * }
- * @param instance
- * @param className
+ * Returns true if `instance.ClassName == className`, otherwise false.
  */
 declare function classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
 
