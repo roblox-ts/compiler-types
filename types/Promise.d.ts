@@ -337,7 +337,7 @@ interface PromiseConstructor {
 		executor: (
 			resolve: (value: T | [T] | [Promise<T>]) => void,
 			reject: (reason?: unknown) => void,
-			onCancel: (abortHandler: () => void) => boolean,
+			onCancel: (abortHandler?: () => void) => boolean,
 		) => void,
 	) => Promise<T>;
 
