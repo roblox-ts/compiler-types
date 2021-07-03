@@ -58,7 +58,7 @@ type ReturnType<T extends (...args: Array<any>) => any> = T extends (...args: Ar
 /** Obtain the return type of a constructor function type */
 type InstanceType<T extends new (...args: Array<any>) => any> = T extends new (...args: Array<any>) => infer R
 	? R
-	: any;
+	: never;
 
 /** Combines a series of intersections into one object, e.g. { x: number } & { y: number } becomes { x: number, y: number } */
 type Reconstruct<T> = _<{ [K in keyof T]: T[K] }>;
