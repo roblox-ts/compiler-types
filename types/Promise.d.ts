@@ -454,7 +454,7 @@ interface PromiseConstructor {
 	 * return Promise.any(promises) -- Resolves with first value to resolve (only rejects if all 3 rejected)
 	 * ```
 	 */
-	any: <T>(promises: Array<Promise<T>>) => Promise<Array<T>>;
+	any: <T>(promises: Array<Promise<T>>) => Promise<T>;
 
 	/**
 	 * Returns a Promise that resolves after `seconds` seconds have passed. The Promise resolves with the actual amount of time that was waited.
