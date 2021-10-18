@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/compiler-types",
-  "version": "1.2.3-types.1",
+  "version": "1.2.4-types.0",
   "description": "",
   "main": "types/core.d.ts",
   "types": "types/core.d.ts",
