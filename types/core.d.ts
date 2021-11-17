@@ -18,7 +18,16 @@
  *
  * **Use `boolean` instead!**
  */
-interface Boolean {}
+interface Boolean {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	 readonly _nominal_Boolean: unique symbol;
+}
 
 /**
  * **DO NOT USE!**
@@ -36,7 +45,16 @@ interface IArguments {}
  *
  * **Use `number` instead!**
  */
-interface Number {}
+interface Number {
+	/**
+	 * **DO NOT USE!**
+	 *
+	 * This field exists to force TypeScript to recognize this as a nominal type
+	 * @hidden
+	 * @deprecated
+	 */
+	 readonly _nominal_Number: unique symbol;
+}
 
 /**
  * **DO NOT USE!**
