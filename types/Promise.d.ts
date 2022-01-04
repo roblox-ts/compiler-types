@@ -358,7 +358,8 @@ interface PromiseConstructor {
 	promisify: <T extends Array<any>, U>(callback: (...args: T) => U) => (...args: T) => Promise<U>;
 
 	/** Creates an immediately resolved Promise with the given value. */
-	resolve: <T>(value: T) => Promise<T>;
+	resolve(this: void): Promise<void>;
+	resolve<T>(this: void, value: T): Promise<T>;
 
 	/**
 	 * Creates an immediately rejected Promise with the given value.
