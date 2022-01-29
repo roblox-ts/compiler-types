@@ -47,18 +47,19 @@ type ExcludeMembers<T, U> = Pick<T, ExcludeKeys<T, U>>;
 type NonNullable<T> = unknown extends T ? defined : T extends null | undefined ? never : T;
 
 /** Obtain the parameters of a function type in a `tuple | never`. */
-type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+type Parameters<T> = T extends (...args: infer P) => any ? P : never;
 
 /** Obtain the parameters of a constructor function type in a `tuple | never` */
 type ConstructorParameters<T extends new (...args: any) => any> = T extends new (...args: infer P) => any ? P : never;
 
 /** Obtain the return type of a function type */
-type ReturnType<T extends (...args: Array<any>) => any> = T extends (...args: Array<any>) => infer R ? R : never;
+type ReturnType<T> = T extends (...args: Array<any>) => infer R ? R : never;
+
+/** Returns the type of `this` for a given function type */
+type InferThis<T> = T extends (this: infer U, ...parameters: Array<any>) => any ? U : never;
 
 /** Obtain the return type of a constructor function type */
-type InstanceType<T extends new (...args: Array<any>) => any> = T extends new (...args: Array<any>) => infer R
-	? R
-	: never;
+type InstanceType<T> = T extends new (...args: Array<any>) => infer R ? R : never;
 
 /** Combines a series of intersections into one object, e.g. { x: number } & { y: number } becomes { x: number, y: number } */
 type Reconstruct<T> = _<{ [K in keyof T]: T[K] }>;

@@ -146,3 +146,7 @@ type LuaTuple<T extends Array<any>> = T & {
 	 */
 	readonly _nominal_LuaTuple: unique symbol;
 };
+
+interface TypedPropertyDescriptor<T> {
+	value: (self: InferThis<T>, ...parameters: Parameters<T>) => ReturnType<T>;
+}
