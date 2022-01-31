@@ -257,23 +257,8 @@ interface Array<T> extends ReadonlyArray<T> {
 }
 
 interface ArrayConstructor {
-	/** Instantiates a new empty array. */
-	new <T>(): Array<T>;
-
-	/**
-	 * Instantiates a new preallocated array.
-	 * If length is provided, there will be allocated `length` amount of nil's into the new array.
-	 * If value is provided, instead of nil, the value will be allocated instead.
-	 * Note that this does not affect the `length` property of the array if no `value` is provided.
-	 * it only keeps it from needing to resize to this `length` later.
-	 *
-	 * This is the same as `table.create` in Lua.
-	 *
-	 * @param length The length of the array to allocate
-	 * @param value The value that the array will be filled with (amount based on `length`)
-	 */
-	new <T>(length: number): Array<T>;
-	new <T>(length: number, value: T): Array<T>;
+	new <T>(arrayLength?: number): T[];
+	new <T>(...items: T[]): T[];
 }
 
 declare const Array: ArrayConstructor;
