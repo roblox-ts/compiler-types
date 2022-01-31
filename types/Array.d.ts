@@ -263,7 +263,7 @@ interface ArrayConstructor {
 	/**
 	 * Instantiates a new preallocated array.
 	 * If `length` is provided, there will be allocated `length` amount of nil's into the new array.
-	 * If value is provided, instead of nil, the value will be allocated instead.
+	 * If `value` is provided, instead of nil, the value will be allocated instead.
 	 *
 	 * This is the same as `table.create` in Lua.
 	 *
