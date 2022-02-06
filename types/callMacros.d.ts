@@ -69,3 +69,17 @@ declare function $identity<T>(arg: T): T;
  * The `step` argument controls the amount incremented per loop. It defaults to `1`.
  */
 declare function $range(start: number, finish: number, step?: number): IterableFunction<number>;
+
+/**
+ * **Only valid as the expression of a return statement!**
+ *
+ * Compiles directly to a multiple return in Lua. For example,
+ * ```ts
+ * return $tuple(123, "abc", true);
+ * ```
+ * will compile into
+ * ```lua
+ * return 123, "abc", true
+ * ```
+ */
+declare function $tuple<T extends Array<any>>(...values: T): LuaTuple<T>;
