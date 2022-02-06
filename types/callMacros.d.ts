@@ -49,3 +49,23 @@ declare function $classIs<T extends keyof Instances>(instance: Instance, classNa
  * }
  */
 declare function $identity<T>(arg: T): T;
+
+/**
+ * **Only valid as the expression of a for-of loop!**
+ *
+ * Used to compile directly to normal Lua numeric for loops. For example,
+ * ```ts
+ * for (const i of $range(1, 10)) {
+ * 	print(i);
+ * }
+ * ```
+ * will compile into
+ * ```lua
+ * for i = 1, 10 do
+ * 	print(i)
+ * end
+ * ```
+ *
+ * The `step` argument controls the amount incremented per loop. It defaults to `1`.
+ */
+declare function $range(start: number, finish: number, step?: number): IterableFunction<number>;
