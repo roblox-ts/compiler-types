@@ -543,6 +543,19 @@ interface PromiseConstructor {
 	retry: <P extends Array<any>, T>(callback: (...args: P) => Promise<T>, times: number, ...args: P) => Promise<T>;
 
 	/**
+	 * Repeatedly calls a Promise-returning function up to `times` number of times, waiting `seconds` seconds between
+	 * each retry, until the returned Promise resolves.
+	 *
+	 * If the amount of retries is exceeded, the function will return the latest rejected Promise.
+	 */
+	retryWithDelay: <P extends Array<any>, T>(
+		callback: (...args: P) => Promise<T>,
+		times: number,
+		seconds: number,
+		...args: P
+	) => Promise<T>;
+
+	/**
 	 * Converts an event into a Promise which resolves the next time the event fires.
 	 *
 	 * The optional `predicate` callback, if passed, will receive the event arguments and should return `true` or `false`, based on if this fired event should resolve the Promise or not. If `true`, the Promise resolves. If `false`, nothing happens and the predicate will be rerun the next time the event fires.
@@ -593,6 +606,14 @@ interface PromiseConstructor {
 		reducer: (accumulator: U, value: T, index: number) => U | Promise<U>,
 		initialValue: U,
 	) => Promise<U>;
+
+	/**
+	 * Registers a callback that runs when an unhandled rejection happens. An unhandled rejection happens when a Promise
+	 * is rejected, and the rejection is not observed with `:catch`.
+	 *
+	 * The callback is called with the actual promise that rejected, followed by the rejection values.
+	 */
+	onUnhandledRejection: (callback: (this: Promise<never>, ...values: Array<unknown>) => void) => () => void;
 }
 
 declare namespace Promise {
