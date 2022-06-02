@@ -68,7 +68,7 @@ declare function $identity<T>(arg: T): T;
  *
  * The `step` argument controls the amount incremented per loop. It defaults to `1`.
  */
-declare function $range(start: number, finish: number, step?: number): IterableFunction<number>;
+declare function $range(start: number, finish: number, step?: number): Iterable<number>;
 
 /**
  * **Only valid as the expression of a return statement!**
