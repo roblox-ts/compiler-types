@@ -8,7 +8,7 @@ declare function assert<T>(condition: T, message?: string): asserts condition;
  * Returns the type of the given object as a string. This function works similarly to Lua’s native type function, with
  * the exceptions that Roblox-defined data types like Vector3 and CFrame return their respective data types as strings.
  */
-declare function typeOf(value: any): keyof CheckableTypes;
+declare function $typeof(value: any): keyof CheckableTypes;
 
 /**
  * Returns true if `typeof(value) == type`, otherwise false.
@@ -21,14 +21,14 @@ declare function typeOf(value: any): keyof CheckableTypes;
  * }
  * ```
  */
-declare function typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
+declare function $typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
 
 /**
  * Calls the function func with the given arguments in protected mode.
  *
  * opcall is an easier to use version of pcall. It returns a result object instead of multiple returns.
  */
-declare function opcall<T extends Array<any>, U>(
+declare function $opcall<T extends Array<any>, U>(
 	func: (...args: T) => U,
 	...args: T
 ): { success: true; value: U } | { success: false; error: string };
@@ -36,7 +36,7 @@ declare function opcall<T extends Array<any>, U>(
 /**
  * Returns true if `instance.ClassName == className`, otherwise false.
  */
-declare function classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
+declare function $classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
 
 /**
  * Returns the passed argument. This function is a macro that compiles to just `arg`.
@@ -48,4 +48,38 @@ declare function classIs<T extends keyof Instances>(instance: Instance, classNam
  *   pos: identity<P>({ x: 5, y: 10 });
  * }
  */
-declare function identity<T>(arg: T): T;
+declare function $identity<T>(arg: T): T;
+
+/**
+ * **Only valid as the expression of a for-of loop!**
+ *
+ * Used to compile directly to normal Lua numeric for loops. For example,
+ * ```ts
+ * for (const i of $range(1, 10)) {
+ * 	print(i);
+ * }
+ * ```
+ * will compile into
+ * ```lua
+ * for i = 1, 10 do
+ * 	print(i)
+ * end
+ * ```
+ *
+ * The `step` argument controls the amount incremented per loop. It defaults to `1`.
+ */
+declare function $range(start: number, finish: number, step?: number): Iterable<number>;
+
+/**
+ * **Only valid as the expression of a return statement!**
+ *
+ * Compiles directly to a multiple return in Lua. For example,
+ * ```ts
+ * return $tuple(123, "abc", true);
+ * ```
+ * will compile into
+ * ```lua
+ * return 123, "abc", true
+ * ```
+ */
+declare function $tuple<T extends Array<any>>(...values: T): LuaTuple<T>;

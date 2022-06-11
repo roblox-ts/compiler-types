@@ -4,4 +4,4 @@
 /**
  * This variable will be automatically replaced by the "version" string from the package.json file
  */
-declare const PKG_VERSION: string;
+declare const $PKG_VERSION: string;
