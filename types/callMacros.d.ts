@@ -24,16 +24,6 @@ declare function $typeof(value: any): keyof CheckableTypes;
 declare function $typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
 
 /**
- * Calls the function func with the given arguments in protected mode.
- *
- * opcall is an easier to use version of pcall. It returns a result object instead of multiple returns.
- */
-declare function $opcall<T extends Array<any>, U>(
-	func: (...args: T) => U,
-	...args: T
-): { success: true; value: U } | { success: false; error: string };
-
-/**
  * Returns true if `instance.ClassName == className`, otherwise false.
  */
 declare function $classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
