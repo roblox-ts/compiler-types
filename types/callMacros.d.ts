@@ -8,7 +8,7 @@ declare function assert<T>(condition: T, message?: string): asserts condition;
  * Returns the type of the given object as a string. This function works similarly to Lua’s native type function, with
  * the exceptions that Roblox-defined data types like Vector3 and CFrame return their respective data types as strings.
  */
-declare function $typeof(value: any): keyof CheckableTypes;
+declare function typeOf(value: any): keyof CheckableTypes;
 
 /**
  * Returns true if `typeof(value) == type`, otherwise false.
@@ -21,12 +21,12 @@ declare function $typeof(value: any): keyof CheckableTypes;
  * }
  * ```
  */
-declare function $typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
+declare function typeIs<T extends keyof CheckableTypes>(value: any, type: T): value is CheckableTypes[T];
 
 /**
  * Returns true if `instance.ClassName == className`, otherwise false.
  */
-declare function $classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
+declare function classIs<T extends keyof Instances>(instance: Instance, className: T): instance is Instances[T];
 
 /**
  * Returns the passed argument. This function is a macro that compiles to just `arg`.
@@ -38,7 +38,7 @@ declare function $classIs<T extends keyof Instances>(instance: Instance, classNa
  *   pos: identity<P>({ x: 5, y: 10 });
  * }
  */
-declare function $identity<T>(arg: T): T;
+declare function identity<T>(arg: T): T;
 
 /**
  * **Only valid as the expression of a for-of loop!**
