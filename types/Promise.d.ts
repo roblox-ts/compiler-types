@@ -387,7 +387,7 @@ interface PromiseConstructor {
 	 * return Promise.all(promises)
 	 * ```
 	 */
-	all: <T extends Array<unknown>>(values: readonly [...T]) => Promise<{ [P in keyof T]: Awaited<T[P]> }>;
+	all: <T extends ReadonlyArray<Promise<unknown>>>(promises: T) => Promise<{ [P in keyof T]: Awaited<T[P]> }>;
 
 	/**
 	 * Accepts an array of Promises and returns a new Promise that resolves with an array of in-place Statuses when all input Promises have settled. This is equivalent to mapping `promise:finally` over the array of Promises.
@@ -402,7 +402,7 @@ interface PromiseConstructor {
 	 * return Promise.allSettled(promises)
 	 * ```
 	 */
-	allSettled: <T>(promises: Array<Promise<T>>) => Promise<Array<Promise.Status>>;
+	allSettled: <T extends ReadonlyArray<Promise<unknown>>>(promises: T) => Promise<{ [P in keyof T]: Promise.Status }>;
 
 	/**
 	 * Accepts an array of Promises and returns a new promise that is resolved or rejected as soon as any Promise in the array resolves or rejects.
@@ -422,7 +422,7 @@ interface PromiseConstructor {
 	 * return Promise.race(promises)
 	 * ```
 	 */
-	race: <T>(promises: Array<Promise<T>>) => Promise<T>;
+	race: <T extends Promise<unknown>>(promises: ReadonlyArray<T>) => Promise<Awaited<T>>;
 
 	/**
 	 * Accepts an array of Promises and returns a Promise that is resolved as soon as `count` Promises are resolved from the input array. The resolved array values are in the order that the Promises resolved in. When this Promise resolves, all other pending Promises are cancelled if they have no other consumers.
@@ -439,7 +439,7 @@ interface PromiseConstructor {
 	 * return Promise.some(promises, 2) -- Only resolves with first 2 promises to resolve
 	 * ```
 	 */
-	some: <T>(promises: Array<Promise<T>>, count: number) => Promise<Array<T>>;
+	some: <T extends Promise<unknown>, N extends number>(promises: ReadonlyArray<T>, count: N) => Promise<TS.BuildTuple<Awaited<T>, N>>;
 
 	/**
 	 * Accepts an array of Promises and returns a Promise that is resolved as soon as _any_ of the input Promises resolves. It will reject only if _all_ input Promises reject. As soon as one Promises resolves, all other pending Promises are cancelled if they have no other consumers.
@@ -455,7 +455,7 @@ interface PromiseConstructor {
 	 * return Promise.any(promises) -- Resolves with first value to resolve (only rejects if all 3 rejected)
 	 * ```
 	 */
-	any: <T>(promises: Array<Promise<T>>) => Promise<T>;
+	any: <T extends Promise<unknown>>(promises: ReadonlyArray<T>) => Promise<Awaited<T>>;
 
 	/**
 	 * Returns a Promise that resolves after `seconds` seconds have passed. The Promise resolves with the actual amount of time that was waited.
@@ -621,3 +621,24 @@ declare namespace Promise {
 }
 
 declare const Promise: PromiseConstructor;
+
+/** internal */
+declare namespace TS {
+	/** Returns a Tuple of size N filled with T */
+	type BuildTupleUnchecked<T, N extends number, A extends Array<any> = []> = A extends { length: infer L }
+		? L extends N
+			? A
+			: BuildTupleUnchecked<T, N, [...A, T]>
+		: never;
+
+	/** Returns a Tuple of size N filled with T, but defaults to Array<T> if N is `number`, or negative, or a decimal. */
+	type BuildTuple<T, N extends number> = N extends number
+		? number extends N
+			? Array<T>
+			: `${N}` extends `-${string}`
+			? Array<T>
+			: `${N}` extends `${string}.${string}`
+			? Array<T>
+			: BuildTupleUnchecked<T, N, []>
+		: never;
+}
