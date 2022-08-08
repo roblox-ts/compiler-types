@@ -127,3 +127,23 @@ type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;
 
 /** Unwraps a Promise<T> */
 type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
+
+/** Returns a Tuple of size N filled with T */
+type BuildTupleUnchecked<T, N extends number, A extends Array<any> = []> =
+	A extends { length: infer L }
+		? L extends N
+			? A
+			: BuildTupleUnchecked<T, N, [...A, T]>
+		: never;
+
+/** Returns a Tuple of size N filled with T, but defaults to Array<T> if N is `number`, or negative, or a decimal. */
+type BuildTuple<T, N extends number> =
+	N extends number
+		? number extends N
+			? Array<T>
+			: `${N}` extends `-${string}`
+				? Array<T>
+				: `${N}` extends `${string}.${string}`
+					? Array<T>
+					: BuildTupleUnchecked<T, N, []>
+		: never;
