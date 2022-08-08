@@ -439,7 +439,7 @@ interface PromiseConstructor {
 	 * return Promise.some(promises, 2) -- Only resolves with first 2 promises to resolve
 	 * ```
 	 */
-	some: <T extends Promise<unknown>, N extends number>(promises: ReadonlyArray<T>, count: N) => Promise<BuildTuple<Awaited<T>, N>>
+	some: <T extends Promise<unknown>, N extends number>(promises: ReadonlyArray<T>, count: N) => Promise<BuildTuple<Awaited<T>, N>>;
 
 	/**
 	 * Accepts an array of Promises and returns a Promise that is resolved as soon as _any_ of the input Promises resolves. It will reject only if _all_ input Promises reject. As soon as one Promises resolves, all other pending Promises are cancelled if they have no other consumers.
