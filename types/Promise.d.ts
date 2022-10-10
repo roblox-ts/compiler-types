@@ -280,6 +280,15 @@ interface PromiseConstructor {
 		readonly Cancelled: "Cancelled";
 	};
 
+	readonly Error: {
+		readonly Kind: {
+			readonly ExecutionError: "ExecusionError";
+			readonly AlreadyCancelled: "AlreadyCancelled";
+			readonly NotResolvedInTime: "NotResolvedInTime";
+			readonly TimedOut: "TimedOut";
+		};
+	};
+
 	/**
 	 * Construct a new Promise that will be resolved or rejected with the given callbacks.
 	 *
@@ -618,6 +627,7 @@ interface PromiseConstructor {
 
 declare namespace Promise {
 	export type Status = PromiseConstructor["Status"][keyof PromiseConstructor["Status"]];
+	export type Error = PromiseConstructor["Error"]["Kind"][keyof PromiseConstructor["Error"]["Kind"]];
 }
 
 declare const Promise: PromiseConstructor;
