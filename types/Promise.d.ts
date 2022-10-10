@@ -11,13 +11,13 @@ interface PromiseErrorOptions {
 }
 
 interface PromiseError {
-	error: string;
-	trace?: string;
-	context?: string;
-	kind?: keyof PromiseErrorConstructor["Kind"];
-	parent?: PromiseError;
-	createdTick: number;
-	createdTrace: string;
+	readonly error: string;
+	readonly trace?: string;
+	readonly context?: string;
+	readonly kind?: keyof PromiseErrorConstructor["Kind"];
+	readonly parent?: PromiseError;
+	readonly createdTick: number;
+	readonly createdTrace: string;
 
 	extend(options?: Partial<PromiseErrorOptions>): PromiseError;
 
