@@ -282,7 +282,7 @@ interface PromiseConstructor {
 
 	readonly Error: {
 		readonly Kind: {
-			readonly ExecutionError: "ExecusionError";
+			readonly ExecutionError: "ExecutionError";
 			readonly AlreadyCancelled: "AlreadyCancelled";
 			readonly NotResolvedInTime: "NotResolvedInTime";
 			readonly TimedOut: "TimedOut";
