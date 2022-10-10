@@ -4,6 +4,41 @@
 // Based on roblox-lua-promise v3.1.0
 // https://eryn.io/roblox-lua-promise/
 
+interface PromiseErrorOptions {
+	trace: string;
+	context: string;
+	kind: keyof PromiseErrorConstructor["Kind"];
+}
+
+interface PromiseError {
+	error: string;
+	trace?: string;
+	context?: string;
+	kind?: keyof PromiseErrorConstructor["Kind"];
+	parent?: PromiseError;
+	createdTick: number;
+	createdTrace: string;
+
+	extend(options?: Partial<PromiseErrorOptions>): PromiseError;
+
+	getErrorChain(): Array<PromiseError>;
+}
+
+interface PromiseErrorConstructor {
+	readonly Kind: {
+		readonly ExecutionError: "ExecutionError";
+		readonly AlreadyCancelled: "AlreadyCancelled";
+		readonly NotResolvedInTime: "NotResolvedInTime";
+		readonly TimedOut: "TimedOut";
+	};
+
+	is(anything: any): boolean;
+
+	isKind(anything: any, kind: keyof PromiseErrorConstructor["Kind"]): boolean;
+
+	new (options?: Partial<PromiseErrorOptions>, parent?: PromiseError): PromiseError;
+}
+
 interface PromiseLike<T> {
 	/**
 	 * Chains onto an existing Promise and returns a new Promise.
@@ -280,14 +315,7 @@ interface PromiseConstructor {
 		readonly Cancelled: "Cancelled";
 	};
 
-	readonly Error: {
-		readonly Kind: {
-			readonly ExecutionError: "ExecutionError";
-			readonly AlreadyCancelled: "AlreadyCancelled";
-			readonly NotResolvedInTime: "NotResolvedInTime";
-			readonly TimedOut: "TimedOut";
-		};
-	};
+	readonly Error: PromiseErrorConstructor;
 
 	/**
 	 * Construct a new Promise that will be resolved or rejected with the given callbacks.
@@ -627,7 +655,7 @@ interface PromiseConstructor {
 
 declare namespace Promise {
 	export type Status = PromiseConstructor["Status"][keyof PromiseConstructor["Status"]];
-	export type Error = PromiseConstructor["Error"]["Kind"][keyof PromiseConstructor["Error"]["Kind"]];
+	export type Error = PromiseError;
 }
 
 declare const Promise: PromiseConstructor;
