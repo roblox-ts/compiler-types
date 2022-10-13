@@ -32,9 +32,9 @@ interface PromiseErrorConstructor {
 		readonly TimedOut: "TimedOut";
 	};
 
-	is(anything: any): boolean;
+	is(value: unknown): value is PromiseError;
 
-	isKind(anything: any, kind: keyof PromiseErrorConstructor["Kind"]): boolean;
+	isKind(value: unknown, kind: keyof PromiseErrorConstructor["Kind"]): value is PromiseError;
 
 	new (options?: Partial<PromiseErrorOptions>, parent?: PromiseError): PromiseError;
 }
