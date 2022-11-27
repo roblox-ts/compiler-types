@@ -6,7 +6,7 @@
 
 declare namespace Promise {
 	namespace Error {
-		type Kind = Promise.ErrorConstructor["Kind"][keyof Promise.ErrorConstructor["Kind"]];
+		type Kind = "ExecutionError" | "AlreadyCancelled" | "NotResolvedInTime" | "TimedOut";
 	}
 
 	interface ErrorOptions {
@@ -30,12 +30,7 @@ declare namespace Promise {
 	}
 
 	interface ErrorConstructor {
-		readonly Kind: {
-			readonly ExecutionError: "ExecutionError";
-			readonly AlreadyCancelled: "AlreadyCancelled";
-			readonly NotResolvedInTime: "NotResolvedInTime";
-			readonly TimedOut: "TimedOut";
-		};
+		readonly Kind: { readonly [K in Promise.Error.Kind]: K };
 
 		is(value: unknown): value is Promise.Error;
 
