@@ -4,39 +4,45 @@
 // Based on roblox-lua-promise v3.1.0
 // https://eryn.io/roblox-lua-promise/
 
-interface PromiseErrorOptions {
-	trace: string;
-	context: string;
-	kind: keyof PromiseErrorConstructor["Kind"];
-}
+declare namespace Promise {
+	namespace Error {
+		type Kind = Promise.ErrorConstructor["Kind"][keyof Promise.ErrorConstructor["Kind"]];
+	}
 
-interface PromiseError {
-	readonly error: string;
-	readonly trace?: string;
-	readonly context?: string;
-	readonly kind?: keyof PromiseErrorConstructor["Kind"];
-	readonly parent?: PromiseError;
-	readonly createdTick: number;
-	readonly createdTrace: string;
+	interface ErrorOptions {
+		trace: string;
+		context: string;
+		kind: Promise.Error.Kind;
+	}
 
-	extend(options?: Partial<PromiseErrorOptions>): PromiseError;
+	interface Error {
+		readonly error: string;
+		readonly trace?: string;
+		readonly context?: string;
+		readonly kind?: Promise.Error.Kind;
+		readonly parent?: Promise.Error;
+		readonly createdTick: number;
+		readonly createdTrace: string;
 
-	getErrorChain(): Array<PromiseError>;
-}
+		extend(options?: Partial<Promise.ErrorOptions>): Promise.Error;
 
-interface PromiseErrorConstructor {
-	readonly Kind: {
-		readonly ExecutionError: "ExecutionError";
-		readonly AlreadyCancelled: "AlreadyCancelled";
-		readonly NotResolvedInTime: "NotResolvedInTime";
-		readonly TimedOut: "TimedOut";
-	};
+		getErrorChain(): Array<Promise.Error>;
+	}
 
-	is(value: unknown): value is PromiseError;
+	interface ErrorConstructor {
+		readonly Kind: {
+			readonly ExecutionError: "ExecutionError";
+			readonly AlreadyCancelled: "AlreadyCancelled";
+			readonly NotResolvedInTime: "NotResolvedInTime";
+			readonly TimedOut: "TimedOut";
+		};
 
-	isKind(value: unknown, kind: keyof PromiseErrorConstructor["Kind"]): value is PromiseError;
+		is(value: unknown): value is Promise.Error;
 
-	new (options?: Partial<PromiseErrorOptions>, parent?: PromiseError): PromiseError;
+		isKind(value: unknown, kind: Promise.Error.Kind): value is Promise.Error;
+
+		new (options?: Partial<Promise.ErrorOptions>, parent?: Promise.Error): Promise.Error;
+	}
 }
 
 interface PromiseLike<T> {
@@ -315,7 +321,7 @@ interface PromiseConstructor {
 		readonly Cancelled: "Cancelled";
 	};
 
-	readonly Error: PromiseErrorConstructor;
+	readonly Error: Promise.ErrorConstructor;
 
 	/**
 	 * Construct a new Promise that will be resolved or rejected with the given callbacks.
@@ -655,7 +661,6 @@ interface PromiseConstructor {
 
 declare namespace Promise {
 	export type Status = PromiseConstructor["Status"][keyof PromiseConstructor["Status"]];
-	export type Error = PromiseError;
 }
 
 declare const Promise: PromiseConstructor;
