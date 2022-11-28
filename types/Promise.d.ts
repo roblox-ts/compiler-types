@@ -4,6 +4,42 @@
 // Based on roblox-lua-promise v3.1.0
 // https://eryn.io/roblox-lua-promise/
 
+declare namespace Promise {
+	namespace Error {
+		type Kind = "ExecutionError" | "AlreadyCancelled" | "NotResolvedInTime" | "TimedOut";
+	}
+
+	interface ErrorOptions {
+		trace: string;
+		context: string;
+		kind: Promise.Error.Kind;
+	}
+
+	interface Error {
+		readonly error: string;
+		readonly trace?: string;
+		readonly context?: string;
+		readonly kind?: Promise.Error.Kind;
+		readonly parent?: Promise.Error;
+		readonly createdTick: number;
+		readonly createdTrace: string;
+
+		extend(options?: Partial<Promise.ErrorOptions>): Promise.Error;
+
+		getErrorChain(): Array<Promise.Error>;
+	}
+
+	interface ErrorConstructor {
+		readonly Kind: { readonly [K in Promise.Error.Kind]: K };
+
+		is(value: unknown): value is Promise.Error;
+
+		isKind(value: unknown, kind: Promise.Error.Kind): value is Promise.Error;
+
+		new (options?: Partial<Promise.ErrorOptions>, parent?: Promise.Error): Promise.Error;
+	}
+}
+
 interface PromiseLike<T> {
 	/**
 	 * Chains onto an existing Promise and returns a new Promise.
@@ -279,6 +315,8 @@ interface PromiseConstructor {
 		/** The Promise was cancelled before it finished. */
 		readonly Cancelled: "Cancelled";
 	};
+
+	readonly Error: Promise.ErrorConstructor;
 
 	/**
 	 * Construct a new Promise that will be resolved or rejected with the given callbacks.
