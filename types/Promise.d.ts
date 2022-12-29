@@ -425,7 +425,7 @@ interface PromiseConstructor {
 	 * return Promise.all(promises)
 	 * ```
 	 */
-	all: <T extends Array<unknown>>(values: readonly [...T]) => Promise<{ [P in keyof T]: Awaited<T[P]> }>;
+	all: <T>(values: Array<Promise<T>>) => Promise<T[]>;
 
 	/**
 	 * Accepts an array of Promises and returns a new Promise that resolves with an array of in-place Statuses when all input Promises have settled. This is equivalent to mapping `promise:finally` over the array of Promises.
