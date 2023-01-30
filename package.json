@@ -16,7 +16,7 @@
 		"@rbxts/types": "^1.0.571",
 		"@typescript-eslint/eslint-plugin": "^5.10.0",
 		"@typescript-eslint/parser": "^5.10.0",
-		"eslint": "^8.7.0",
+		"eslint": "^8.33.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-no-autofix": "^1.2.3",
 		"eslint-plugin-prettier": "^4.0.0",
