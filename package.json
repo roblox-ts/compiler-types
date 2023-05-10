@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"@rbxts/types": "^1.0.679",
 		"@typescript-eslint/eslint-plugin": "^5.50.0",
-		"@typescript-eslint/parser": "^5.50.0",
+		"@typescript-eslint/parser": "^5.59.2",
 		"eslint": "^8.33.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-no-autofix": "^1.2.3",
