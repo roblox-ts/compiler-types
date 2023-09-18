@@ -614,10 +614,10 @@ interface PromiseConstructor {
 		predicate?: (...args: T) => boolean
 	): Promise<T>;
 	fromEvent(this: void, event: RBXScriptSignal<() => void>, predicate?: () => boolean): Promise<void>;
-	fromEvent<T>(
+	fromEvent<T extends Array<unknown>>(
 		this: void,
-		event: { Connect: (callback: (value: T) => void) => void },
-		predicate?: (value: T) => boolean,
+		event: { Connect: (callback: (...args: T) => void) => void },
+		predicate?: (...args: T) => boolean,
 	): Promise<T>;
 
 	/** Checks whether the given object is a Promise via duck typing. This only checks if the object is a table and has an `andThen` method. */
