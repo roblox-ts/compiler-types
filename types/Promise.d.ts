@@ -608,11 +608,15 @@ interface PromiseConstructor {
 	 * end)
 	 * ```
 	 */
+<<<<<<< HEAD
 	fromEvent<T extends Array<unknown>>(
 		this: void, 
 		event: RBXScriptSignal<(...args: T) => void>, 
 		predicate?: (...args: T) => boolean
 	): Promise<T>;
+=======
+	fromEvent<T>(this: void, event: RBXScriptSignal<(value: T) => void>, predicate?: (value: T) => boolean): Promise<T>;
+>>>>>>> parent of 9ab2210 (Predicate should accept variadic args)
 	fromEvent(this: void, event: RBXScriptSignal<() => void>, predicate?: () => boolean): Promise<void>;
 	fromEvent<T extends Array<unknown>>(
 		this: void,
