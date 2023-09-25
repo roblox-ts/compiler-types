@@ -101,10 +101,7 @@ interface ReadonlyArray<T> extends ArrayLike<T>, Iterable<T> {
 	 * @param callback A function that accepts up to three arguments. The map method calls the callback function one
 	 * time for each element in the array.
 	 */
-	map<U>(
-		this: ReadonlyArray<defined>,
-		callback: (value: T, index: number, array: ReadonlyArray<T>) => U,
-	): Array<U>;
+	map<U>(this: ReadonlyArray<defined>, callback: (value: T, index: number, array: ReadonlyArray<T>) => U): Array<U>;
 
 	/**
 	 * Calls a defined callback function on each element of an array, and returns an array that contains the results.
