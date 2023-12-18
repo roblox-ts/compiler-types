@@ -13,15 +13,15 @@
 		"types/*.d.ts"
 	],
 	"devDependencies": {
-		"@rbxts/types": "^1.0.725",
-		"@typescript-eslint/eslint-plugin": "^6.8.0",
-		"@typescript-eslint/parser": "^6.8.0",
-		"eslint": "^8.52.0",
-		"eslint-config-prettier": "^9.0.0",
+		"@rbxts/types": "^1.0.737",
+		"@typescript-eslint/eslint-plugin": "^6.15.0",
+		"@typescript-eslint/parser": "^6.15.0",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-no-autofix": "^1.2.3",
 		"eslint-plugin-prettier": "^5.0.1",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
-		"prettier": "^3.0.3",
+		"prettier": "^3.1.1",
 		"typescript": "^5.2.2"
 	}
 }
