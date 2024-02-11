@@ -71,23 +71,20 @@ type UnionToIntersection<T> = (T extends object ? (k: T) => void : never) extend
 type ThisParameterType<T> = T extends (this: infer U, ...args: Array<any>) => any ? U : unknown;
 
 /** Removes the 'this' parameter from a function type. */
-type OmitThisParameter<T> = unknown extends ThisParameterType<T>
-	? T
-	: T extends (...args: infer A) => infer R
-	? (...args: A) => R
-	: T;
+type OmitThisParameter<T> =
+	unknown extends ThisParameterType<T> ? T : T extends (...args: infer A) => infer R ? (...args: A) => R : T;
 
 /** Given an object `T`, returns a unioned type of all non-readonly property names. */
 type WritablePropertyNames<T> = {
 	[K in keyof T]-?: T[K] extends Callback
 		? never
 		: (<F>() => F extends { [Q in K]: T[K] } ? 1 : 2) extends <F>() => F extends {
-				-readonly [Q in K]: T[K];
-		  }
-				? 1
-				: 2
-		? K
-		: never;
+					-readonly [Q in K]: T[K];
+			  }
+					? 1
+					: 2
+			? K
+			: never;
 }[keyof T];
 
 /** Given an object `T`, returns an object with readonly fields filtered out. */
