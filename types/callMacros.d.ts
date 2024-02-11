@@ -73,3 +73,16 @@ declare function $range(start: number, finish: number, step?: number): Iterable<
  * ```
  */
 declare function $tuple<T extends Array<any>>(...values: T): LuaTuple<T>;
+
+/**
+ * Provides the instance tree representation to `path` at runtime.
+ *
+ * ```ts
+ * $getModuleTree("@rbxts/services");
+ * ```
+ * will, assuming the default rojo game project, compile into
+ * ```lua
+ * { game:GetService("ReplicatedStorage"), { "rbxts_include", "node_modules", "@rbxts", "services" } }
+ * ```
+ */
+declare function $getModuleTree(module: string): [root: Instance, parts: Array<string>];
