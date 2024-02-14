@@ -154,5 +154,15 @@ type Add<T> = { add: T };
 type Sub<T> = { sub: T };
 type Mul<T> = { mul: T };
 type Div<T> = { div: T };
-type Concat<T> = { concat: T };
 type IDiv<T> = { idiv: T };
+type Concat<T> = { concat: T };
+type Mod<T> = { mod: T };
+type Pow<T> = { pow: T };
+type Eq<T> = { eq: T };
+type Lt<T> = { lt: T };
+type Le<T> = { le: T };
+type Gt<T> = { gt: T };
+type Ge<T> = { ge: T };
+
+type Unm<T> = { unm: T };
+type Len<T> = { len: T };
