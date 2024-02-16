@@ -22,6 +22,12 @@ interface SymbolConstructor {
 	(description?: string | number): symbol;
 
 	/**
+	 * A method that determines if a constructor object recognizes an object as one of the
+	 * constructor’s instances. Called by the semantics of the instanceof operator.
+	 */
+	readonly hasInstance: unique symbol;
+
+	/**
 	 * A method that returns the default iterator for an object. Called by the semantics of the
 	 * for-of statement.
 	 */
