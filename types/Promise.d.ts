@@ -32,9 +32,9 @@ declare namespace Promise {
 	interface ErrorConstructor {
 		readonly Kind: { readonly [K in Promise.Error.Kind]: K };
 
-		is(value: unknown): value is Promise.Error;
+		is: (value: unknown) => value is Promise.Error;
 
-		isKind(value: unknown, kind: Promise.Error.Kind): value is Promise.Error;
+		isKind: (value: unknown, kind: Promise.Error.Kind) => value is Promise.Error;
 
 		new (options?: Partial<Promise.ErrorOptions>, parent?: Promise.Error): Promise.Error;
 	}
