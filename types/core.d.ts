@@ -149,3 +149,20 @@ type LuaTuple<T extends Array<any>> = T & {
 interface TypedPropertyDescriptor<T> {
 	value: (self: InferThis<T>, ...parameters: Parameters<T>) => ReturnType<T>;
 }
+
+type Add<T> = { add: T };
+type Sub<T> = { sub: T };
+type Mul<T> = { mul: T };
+type Div<T> = { div: T };
+type IDiv<T> = { idiv: T };
+type Concat<T> = { concat: T };
+type Mod<T> = { mod: T };
+type Pow<T> = { pow: T };
+type Eq<T> = { eq: T };
+type Lt<T> = { lt: T };
+type Le<T> = { le: T };
+type Gt<T> = { gt: T };
+type Ge<T> = { ge: T };
+
+type Unm<T> = { unm: T };
+type Len<T> = { len: T };
