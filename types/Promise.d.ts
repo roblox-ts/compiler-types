@@ -587,7 +587,7 @@ interface PromiseConstructor {
 	 * return Promise.allSettled(promises)
 	 * ```
 	 */
-	allSettled: <T extends ReadonlyArray<Promise<unknown>> | []>(promises: T) => Promise<Array<Promise.Status>>;
+	allSettled: <T extends Array<Promise<any>> | []>(promises: T) => Promise<Array<Promise.Status>>;
 
 	/**
 	 * Accepts an array of Promises and returns a new promise that is resolved or rejected as soon as any Promise in the array resolves or rejects.
