@@ -254,14 +254,14 @@ interface Promise<T> {
 	 * Attaches an `andThen` handler to this Promise that discards the resolved value and returns the given value from it.
 	 *
 	 * ```lua
-	 * promise:andThenReturn("some", "values")
+	 * promise:andThenReturn("value")
 	 * ```
 	 *
 	 * This is sugar for
 	 *
 	 * ```lua
 	 * promise:andThen(function()
-	 *     return "some", "values"
+	 *     return "value"
 	 * end)
 	 * ```
 	 *
@@ -270,25 +270,23 @@ interface Promise<T> {
 	 * > Promises are eager, so if you pass a Promise to `andThenReturn`, it will begin executing before `andThenReturn` is reached in the chain. Likewise, if you pass a Promise created from [Promise.reject](https://eryn.io/roblox-lua-promise/api/Promise#reject) into `andThenReturn`, it's possible that this will trigger the unhandled rejection warning. If you need to return a Promise, it's usually best practice to use [Promise.andThen](https://eryn.io/roblox-lua-promise/api/Promise#andThen).
 	 */
 	andThenReturn<U>(this: Promise<T>, value: U): Promise<U>;
-	andThenReturn<U extends Array<any>>(this: Promise<T>, ...args: U): Promise<U>;
 
 	/**
 	 * Attaches a `finally` handler to this Promise that discards the resolved value and returns the given value from it.
 	 *
 	 * ```lua
-	 * promise:finallyReturn("some", "values")
+	 * promise:finallyReturn("value")
 	 * ```
 	 *
 	 * This is sugar for
 	 *
 	 * ```lua
 	 * promise:finally(function()
-	 *     return "some", "values"
+	 *     return "value"
 	 * end)
 	 * ```
 	 */
 	finallyReturn<U>(this: Promise<T>, value: U): Promise<U>;
-	finallyReturn<U extends Array<any>>(this: Promise<T>, ...args: U): Promise<U>;
 
 	/**
 	 * Returns a new Promise that resolves if the chained Promise resolves within `seconds` seconds, or rejects if execution time exceeds `seconds`. The chained Promise will be cancelled if the timeout is reached.
