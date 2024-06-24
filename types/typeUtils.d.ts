@@ -123,4 +123,10 @@ type ExcludeNominalKeys<T> = {
 type ExcludeNominalMembers<T> = Pick<T, ExcludeNominalKeys<T>>;
 
 /** Unwraps a Promise<T> */
-type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
+type Awaited<T> = T extends undefined
+	? T // special case for `undefined` when not in `--strictNullChecks` mode
+	: T extends object & { then(successHandler: infer F, ...args: infer _): any } // `await` only unwraps object types with a callable `then`. Non-object types are not unwrapped
+		? F extends (value: infer V, ...args: infer _) => any // if the argument to `then` is callable, extracts the first argument
+			? Awaited<V> // recursively unwrap the value
+			: never // the argument to `then` was not callable
+		: T; // non-object or non-thenable
