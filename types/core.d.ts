@@ -149,3 +149,8 @@ type LuaTuple<T extends Array<any>> = T & {
 interface TypedPropertyDescriptor<T> {
 	value: (self: InferThis<T>, ...parameters: Parameters<T>) => ReturnType<T>;
 }
+
+/**
+ * Marker for non-inference type position
+ */
+type NoInfer<T> = intrinsic;
