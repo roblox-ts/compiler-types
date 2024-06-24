@@ -572,7 +572,7 @@ interface PromiseConstructor {
 	 * return Promise.all(promises)
 	 * ```
 	 */
-	all: <T extends Array<Promise<any>> | []>(promises: T) => Promise<[...{ -readonly [P in keyof T]: Awaited<T[P]> }]>;
+	all: <T extends Array<Promise<any>> | []>(promises: T) => Promise<[...{ [P in keyof T]: Awaited<T[P]> }]>;
 
 	/**
 	 * Accepts an array of Promises and returns a new Promise that resolves with an array of in-place Statuses when all input Promises have settled. This is equivalent to mapping `promise:finally` over the array of Promises.
@@ -587,9 +587,7 @@ interface PromiseConstructor {
 	 * return Promise.allSettled(promises)
 	 * ```
 	 */
-	allSettled: <T extends Array<Promise<any>> | []>(
-		promises: T,
-	) => Promise<{ -readonly [P in keyof T]: Promise.Status }>;
+	allSettled: <T extends Array<Promise<any>> | []>(promises: T) => Promise<Promise.Status>;
 
 	/**
 	 * Accepts an array of Promises and returns a new promise that is resolved or rejected as soon as any Promise in the array resolves or rejects.
