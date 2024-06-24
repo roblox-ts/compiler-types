@@ -110,7 +110,25 @@ interface Promise<T> {
 	 *
 	 * Returns a new promise chained from this promise.
 	 *
-	 * > If the Promise is cancelled, any Promises chained off of it with `andThen` won't run. Only Promises chained with `finally` or `done` will run in the case of cancellation.
+	 * > Set a handler that will be called regardless of the promise's fate. The handler is called when the promise is
+	resolved, rejected, *or* cancelled.
+	Returns a new Promise that:
+	- resolves with the same values that this Promise resolves with.
+	- rejects with the same values that this Promise rejects with.
+	- is cancelled if this Promise is cancelled.
+	If the value you return from the handler is a Promise:
+	- We wait for the Promise to resolve, but we ultimately discard the resolved value.
+	- If the returned Promise rejects, the Promise returned from `finally` will reject with the rejected value from the
+	*returned* promise.
+	- If the `finally` Promise is cancelled, and you returned a Promise from the handler, we cancel that Promise too.
+	Otherwise, the return value from the `finally` handler is entirely discarded.
+	:::note Cancellation
+	As of Promise v4, `Promise:finally` does not count as a consumer of the parent Promise for cancellation purposes.
+	This means that if all of a Promise's consumers are cancelled and the only remaining callbacks are finally handlers,
+	the Promise is cancelled and the finally callbacks run then and there.
+	Cancellation still propagates through the `finally` Promise though: if you cancel the `finally` Promise, it can cancel
+	its parent Promise if it had no other consumers. Likewise, if the parent Promise is cancelled, the `finally` Promise
+	will also be cancelled.
 	 * ```lua
 	 * local thing = createSomething()
 	 *
@@ -135,17 +153,6 @@ interface Promise<T> {
 	): Promise<T | TResult>;
 
 	/**
-	 * Set a handler that will be called only if the Promise resolves or is cancelled. This method is similar to `finally`, except it doesn't catch rejections.
-	 *
-	 * > `done` should be reserved specifically when you want to perform some operation after the Promise is finished (like `finally`), but you don't want to consume rejections (like in [this example](https://eryn.io/roblox-lua-promise/lib/Examples.html#cancellable-animation-sequence)). You should use `andThen` instead if you only care about the Resolved case.
-	 *
-	 * > Like `finally`, if the Promise is cancelled, any Promises chained off of it with `andThen` won't run. Only Promises chained with `done` and `finally` will run in the case of cancellation.
-	 *
-	 * Returns a new promise chained from this promise.
-	 */
-	done<TResult = never>(this: Promise<T>, doneHandler: (status: Promise.Status) => TResult): Promise<TResult>;
-
-	/**
 	 * Attaches an `andThen` handler to this Promise that calls the given callback with the predefined arguments. The resolved value is discarded.
 	 * ```lua
 	 * promise:andThenCall(someFunction, "some", "arguments")
@@ -165,13 +172,6 @@ interface Promise<T> {
 	 * Attaches a `finally` handler to this Promise that calls the given callback with the predefined arguments.
 	 */
 	finallyCall<P extends Array<any>, R>(this: Promise<T>, callback: (...args: P) => R, ...args: P): Promise<R>;
-
-	/**
-	 * Same as `andThenCall`, except for `done`.
-	 *
-	 * Attaches a `done` handler to this Promise that calls the given callback with the predefined arguments.
-	 */
-	doneCall<P extends Array<any>, R>(this: Promise<T>, callback: (...args: P) => R, ...args: P): Promise<R>;
 
 	/**
 	 * Attaches an `andThen` handler to this Promise that discards the resolved value and returns the given value from it.
@@ -201,20 +201,6 @@ interface Promise<T> {
 	 * ```
 	 */
 	finallyReturn<U>(this: Promise<T>, value: U): Promise<U>;
-
-	/**
-	 * Attaches a `done` handler to this Promise that discards the resolved value and returns the given value from it.
-	 * ```lua
-	 * promise:doneReturn("value")
-	 * ```
-	 * This is sugar for
-	 * ```lua
-	 * promise:done(function()
-	 *     return "value"
-	 * end)
-	 * ```
-	 */
-	doneReturn<U>(this: Promise<T>, value: U): Promise<U>;
 
 	/**
 	 * Returns a new Promise that resolves if the chained Promise resolves within `seconds` seconds, or rejects if execution time exceeds `seconds`. The chained Promise will be cancelled if the timeout is reached.
