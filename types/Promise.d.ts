@@ -807,7 +807,7 @@ interface PromiseConstructor {
 	 * end, 0)
 	 * ```
 	 */
-	fold: <T, U = T>(
+	fold: <T, U>(
 		list: Array<T | Promise<T>>,
 		reducer: (accumulator: U, value: T, index: number) => U | Promise<U>,
 		initialValue: U,
