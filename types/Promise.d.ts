@@ -110,7 +110,25 @@ interface Promise<T> {
 	 *
 	 * Returns a new promise chained from this promise.
 	 *
-	 * > If the Promise is cancelled, any Promises chained off of it with `andThen` won't run. Only Promises chained with `finally` will run in the case of cancellation.
+	 * > Set a handler that will be called regardless of the promise's fate. The handler is called when the promise is
+	resolved, rejected, *or* cancelled.
+	Returns a new Promise that:
+	- resolves with the same values that this Promise resolves with.
+	- rejects with the same values that this Promise rejects with.
+	- is cancelled if this Promise is cancelled.
+	If the value you return from the handler is a Promise:
+	- We wait for the Promise to resolve, but we ultimately discard the resolved value.
+	- If the returned Promise rejects, the Promise returned from `finally` will reject with the rejected value from the
+	*returned* promise.
+	- If the `finally` Promise is cancelled, and you returned a Promise from the handler, we cancel that Promise too.
+	Otherwise, the return value from the `finally` handler is entirely discarded.
+	:::note Cancellation
+	As of Promise v4, `Promise:finally` does not count as a consumer of the parent Promise for cancellation purposes.
+	This means that if all of a Promise's consumers are cancelled and the only remaining callbacks are finally handlers,
+	the Promise is cancelled and the finally callbacks run then and there.
+	Cancellation still propagates through the `finally` Promise though: if you cancel the `finally` Promise, it can cancel
+	its parent Promise if it had no other consumers. Likewise, if the parent Promise is cancelled, the `finally` Promise
+	will also be cancelled.
 	 * ```lua
 	 * local thing = createSomething()
 	 *
