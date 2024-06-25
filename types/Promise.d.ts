@@ -204,7 +204,7 @@ interface Promise<T> {
 	 */
 	finally<TResult = never>(
 		this: Promise<T>,
-		finallyHandler?: (status?: Promise.Status) => TResult | undefined | void,
+		onSettled?: (status?: Promise.Status) => TResult | undefined | void,
 	): TResult extends Promise<infer U> ? Promise<U> : Promise<T>;
 
 	/**
@@ -477,8 +477,7 @@ interface PromiseConstructor {
 	 *     end)
 	 * ```
 	 */
-	try<T>(this: void, callback: () => T): Promise<T>;
-	try<T, P extends Array<any>>(this: void, callback: (...args: P) => T, ...args: P): Promise<T>;
+	try: <T>(callback: () => T) => Promise<T>;
 
 	/**
 	 * Wraps a function that yields into one that returns a Promise.
