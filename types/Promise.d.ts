@@ -54,14 +54,14 @@ interface PromiseLike<T> {
 	 *
 	 * > __Tip__
 	 * >
-	 * > If the Promise returned by `then` is cancelled, `successHandler` and `failureHandler` will not run.
+	 * > If the Promise returned by `then` is cancelled, `onResolved` and `onRejected` will not run.
 	 * >
 	 * > To run code no matter what, use [Promise:finally](https://eryn.io/roblox-lua-promise/api/Promise#finally).
 	 */
 	then<TResult1 = T, TResult2 = never>(
 		this: Promise<T>,
-		successHandler?: (value: T) => TResult1 | PromiseLike<TResult1> | undefined | void,
-		failureHandler?: (reason: any) => TResult2 | PromiseLike<TResult2> | undefined | void,
+		onResolved?: (value: T) => TResult1 | PromiseLike<TResult1> | undefined | void,
+		onRejected?: (reason: any) => TResult2 | PromiseLike<TResult2> | undefined | void,
 	): PromiseLike<TResult1 | TResult2>;
 }
 
@@ -82,14 +82,14 @@ interface Promise<T> {
 	 *
 	 * > __Tip__
 	 * >
-	 * > If the Promise returned by `then` is cancelled, `successHandler` and `failureHandler` will not run.
+	 * > If the Promise returned by `then` is cancelled, `onResolved` and `onRejected` will not run.
 	 * >
 	 * > To run code no matter what, use [Promise:finally](https://eryn.io/roblox-lua-promise/api/Promise#finally).
 	 */
 	then<TResult1 = T, TResult2 = never>(
 		this: Promise<T>,
-		successHandler?: (value: T) => TResult1 | Promise<TResult1> | undefined | void,
-		failureHandler?: (reason: any) => TResult2 | Promise<TResult2> | undefined | void,
+		onResolved?: (value: T) => TResult1 | Promise<TResult1> | undefined | void,
+		onRejected?: (reason: any) => TResult2 | Promise<TResult2> | undefined | void,
 	): Promise<TResult1 | TResult2>;
 
 	/**
@@ -105,20 +105,20 @@ interface Promise<T> {
 	 *
 	 * > __Tip__
 	 * >
-	 * > If the Promise returned by `andThen` is cancelled, `successHandler` and `failureHandler` will not run.
+	 * > If the Promise returned by `andThen` is cancelled, `onResolved` and `onRejected` will not run.
 	 * >
 	 * > To run code no matter what, use [Promise:finally](https://eryn.io/roblox-lua-promise/api/Promise#finally).
 	 */
 	andThen<TResult1 = T, TResult2 = never>(
 		this: Promise<T>,
-		successHandler?: (value: T) => TResult1 | Promise<TResult1> | undefined | void,
-		failureHandler?: (reason: any) => TResult2 | Promise<TResult2> | undefined | void,
+		onResolved?: (value: T) => TResult1 | Promise<TResult1> | undefined | void,
+		onRejected?: (reason: any) => TResult2 | Promise<TResult2> | undefined | void,
 	): Promise<TResult1 | TResult2>;
 
 	/**
-	 * Shorthand for `Promise:andThen(nil, failureHandler)`.
+	 * Shorthand for `Promise:andThen(nil, onRejected)`.
 	 *
-	 * Returns a Promise that resolves if the `failureHandler` worked without encountering an additional error.
+	 * Returns a Promise that resolves if the `onRejected` worked without encountering an additional error.
 	 *
 	 * > __Warning__
 	 * >
@@ -128,13 +128,13 @@ interface Promise<T> {
 	 *
 	 * > __Tip__
 	 * >
-	 * > If the Promise returned by `catch` is cancelled,  `failureHandler` will not run.
+	 * > If the Promise returned by `catch` is cancelled,  `onRejected` will not run.
 	 * >
 	 * > To run code no matter what, use [Promise:finally](https://eryn.io/roblox-lua-promise/api/Promise#finally).
 	 */
 	catch<TResult = never>(
 		this: Promise<T>,
-		failureHandler?: (reason: any) => TResult | Promise<TResult> | undefined | void,
+		onRejected?: (reason: any) => TResult | Promise<TResult> | undefined | void,
 	): Promise<T | TResult>;
 
 	/**
