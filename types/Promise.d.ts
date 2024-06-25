@@ -134,8 +134,8 @@ interface Promise<T> {
 	 */
 	catch<TResult = never>(
 		this: Promise<T>,
-		onRejected?: (reason: T) => TResult,
-	): TResult extends undefined | void ? Promise<T> : Promise<Awaited<TResult>>;
+		onRejected?: (reason: any) => TResult | Promise<TResult> | undefined | void,
+	): Promise<T | TResult>;
 
 	/**
 	 * Similar to [Promise.andThen](https://eryn.io/roblox-lua-promise/api/Promise#andThen), except the return value is the same as the value passed to the handler. In other words, you can insert a `:tap` into a Promise chain without affecting the value that downstream Promises receive.
