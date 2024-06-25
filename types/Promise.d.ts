@@ -204,7 +204,7 @@ interface Promise<T> {
 	 */
 	finally<TResult = never>(
 		this: Promise<T>,
-		onSettled?: (status?: Promise.Status) => TResult | undefined | void,
+		onSettled?: (status: Promise.Status) => TResult | undefined | void,
 	): TResult extends Promise<infer U> ? Promise<U> : Promise<T>;
 
 	/**
