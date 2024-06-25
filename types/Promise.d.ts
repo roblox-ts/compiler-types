@@ -636,11 +636,11 @@ interface PromiseConstructor {
 	/**
 	 * Returns a Promise that resolves after `seconds` seconds have passed. The Promise resolves with the actual amount of time that was waited.
 	 *
-	 * This function is a wrapper around `task.delay`.
+	 * This function is **not** a wrapper around `wait`. `Promise.delay` uses a custom scheduler which provides more accurate timing. As an optimization, cancelling this Promise instantly removes the task from the scheduler.
 	 *
 	 * > __Warning__
 	 * >
-	 * > Passing NaN, +Infinity, -Infinity, 0, or any other number less than the duration of a Heartbeat will cause the promise to resolve on the very next Heartbeat.
+	 * > Passing `NaN`, infinity, or a number less than 1/60 is equivalent to passing 1/60.
 	 *
 	 * ```lua
 	 * Promise.delay(5):andThenCall(print, "This prints after 5 seconds")
