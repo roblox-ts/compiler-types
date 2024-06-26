@@ -462,7 +462,7 @@ interface PromiseConstructor {
 	 */
 	defer: <T>(
 		executor: (
-			resolve: (value: T | [T] | [Promise<T>]) => void,
+			resolve: (value: T | Promise<T>) => void,
 			reject: (reason?: unknown) => void,
 			onCancel: (abortHandler?: () => void) => boolean,
 		) => void,
@@ -485,7 +485,7 @@ interface PromiseConstructor {
 	 *     end)
 	 * ```
 	 */
-	try: <T>(callback: () => T) => Promise<T>;
+	try: <T>(callback: () => T) => Promise<Awaited<T>>;
 
 	/**
 	 * Wraps a function that yields into one that returns a Promise.
@@ -508,7 +508,7 @@ interface PromiseConstructor {
 	 * end)
 	 * ```
 	 */
-	promisify: <T extends Array<any>, U>(callback: (...args: T) => U) => (...args: T) => Promise<U>;
+	promisify: <T extends Array<any>, U>(callback: (...args: T) => U) => (...args: T) => Promise<Awaited<U>>;
 
 	/** Creates an immediately resolved Promise with the given value.
 	 *
@@ -797,7 +797,7 @@ interface PromiseConstructor {
 	 */
 	fold: <T, U, R extends U | Promise<U>>(
 		list: Array<T | Promise<T>>,
-		reducer: (accumulator: U, value: T, index: number) => R,
+		reducer: (accumulator: Awaited<U>, value: T, index: number) => R,
 		initialValue: U,
 	) => Promise<Awaited<R>>;
 
