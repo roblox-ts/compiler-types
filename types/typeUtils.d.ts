@@ -70,6 +70,9 @@ type UnionToIntersection<T> = (T extends object ? (k: T) => void : never) extend
 /** Extracts the type of the 'this' parameter of a function type, or 'unknown' if the function type has no 'this' parameter. */
 type ThisParameterType<T> = T extends (this: infer U, ...args: Array<any>) => any ? U : unknown;
 
+/** Renames the `this` parameter to `self`, this allows passing compiler's noIndexWithoutCall diagnostic */
+type InlineThisParameter<T> = T extends (...args: infer A) => infer R ? (self: any, ...args: A) => R : T;
+
 /** Removes the 'this' parameter from a function type. */
 type OmitThisParameter<T> =
 	unknown extends ThisParameterType<T> ? T : T extends (...args: infer A) => infer R ? (...args: A) => R : T;
