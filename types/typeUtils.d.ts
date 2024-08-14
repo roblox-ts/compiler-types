@@ -32,13 +32,13 @@ type Exclude<T, U> = T extends U ? never : T;
 type Extract<T, U> = T extends U ? T : never;
 
 /** Returns a union of all the keys of T whose values extend from U */
-type ExtractKeys<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
+type ExtractKeys<T, U> = { [K in keyof T]-?: T[K] extends U ? K : never }[keyof T];
 
 /** Returns a new object type of all the keys of T whose values extend from U */
 type ExtractMembers<T, U> = Pick<T, ExtractKeys<T, U>>;
 
 /** Returns a union of all the keys of T whose values do not extend from U */
-type ExcludeKeys<T, U> = { [K in keyof T]: T[K] extends U ? never : K }[keyof T];
+type ExcludeKeys<T, U> = { [K in keyof T]-?: T[K] extends U ? never : K }[keyof T];
 
 /** Returns a new object type of all the keys of T whose values do not extend from U */
 type ExcludeMembers<T, U> = Pick<T, ExcludeKeys<T, U>>;
@@ -116,7 +116,7 @@ type WritableInstanceProperties<T extends Instance> = WritableProperties<Instanc
 
 /** Returns a union of all the keys of T which do not start with `_nominal_` */
 type ExcludeNominalKeys<T> = {
-	[K in keyof T]: K extends `_nominal_${infer _U}` ? never : K;
+	[K in keyof T]-?: K extends `_nominal_${infer _U}` ? never : K;
 }[keyof T];
 
 /** Returns a new object type of all the keys of T which do not start with `_nominal_` */
