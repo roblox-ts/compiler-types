@@ -6,6 +6,7 @@
 /// <reference path="Map.d.ts" />
 /// <reference path="Promise.d.ts" />
 /// <reference path="Set.d.ts" />
+/// <reference path="SharedTable.d.ts" />
 /// <reference path="String.d.ts" />
 /// <reference path="Symbol.d.ts" />
 /// <reference path="typeUtils.d.ts" />
