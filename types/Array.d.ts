@@ -244,6 +244,11 @@ interface Array<T> extends ReadonlyArray<T> {
 	 * (`!comp(list[i+1], list[i])` will be true after the sort). Alias to Lua's `table.sort`.
 	 * @param compareFunction A function that defines the sort order. Returns true when the first element must come
 	 * before the second. If omitted, the array is sorted according to the `<` operator.
+	 * @example
+	 * // Vanilla TS:
+	 * arr.sort((a, b) => a - b); //ascending order
+	 * // Roblox Ts:
+	 * arr.sort((a, b) => a < b); //ascending order
 	 */
 	sort(this: Array<defined>, compareFunction?: (a: T, b: T) => boolean): Array<T>;
 
