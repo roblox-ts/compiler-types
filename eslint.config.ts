@@ -24,6 +24,18 @@ export default defineConfig(
 			"simple-import-sort": simpleImportSort,
 		},
 		rules: {
+			// keep the existing lint policy when recommended presets change
+			"no-class-assign": "error",
+			"no-constant-binary-expression": "off",
+			"no-empty-static-block": "off",
+			"no-inner-declarations": ["error", "functions", { blockScopedFunctions: "disallow" }],
+			"no-shadow-restricted-names": ["error", { reportGlobalThis: false }],
+			"no-unassigned-vars": "off",
+			"no-unused-private-class-members": "off",
+			"no-useless-assignment": "off",
+			"no-with": "error",
+			"preserve-caught-error": "off",
+
 			"prettier/prettier": [
 				"warn",
 				{
@@ -81,8 +93,8 @@ export default defineConfig(
 			"simple-import-sort/imports": "warn",
 			"@typescript-eslint/triple-slash-reference": "off",
 			"@typescript-eslint/no-explicit-any": "off",
-			"@typescript-eslint/no-unsafe-function-type": "off",
-			"@typescript-eslint/no-wrapper-object-types": "off",
+			"@typescript-eslint/no-unsafe-function-type": "error",
+			"@typescript-eslint/no-wrapper-object-types": "error",
 		},
 	},
 );
