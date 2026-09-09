@@ -72,7 +72,7 @@ declare function $range(start: number, finish: number, step?: number): Iterable<
  * return 123, "abc", true
  * ```
  */
-declare function $tuple<T extends Array<any>>(...values: T): LuaTuple<T>;
+declare function $tuple<const T extends Array<any>>(...values: T): LuaTuple<T>;
 
 /**
  * Provides the instance tree representation to `path` at runtime.
