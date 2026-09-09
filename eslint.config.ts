@@ -1,11 +1,12 @@
-const { fixupPluginRules } = require("@eslint/compat");
-const js = require("@eslint/js");
-const noAutofix = require("eslint-plugin-no-autofix");
-const prettierRecommended = require("eslint-plugin-prettier/recommended");
-const simpleImportSort = require("eslint-plugin-simple-import-sort");
-const tseslint = require("typescript-eslint");
+import { fixupPluginRules } from "@eslint/compat";
+import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
+import noAutofix from "eslint-plugin-no-autofix";
+import prettierRecommended from "eslint-plugin-prettier/recommended";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import tseslint from "typescript-eslint";
 
-module.exports = [
+export default defineConfig(
 	{ ignores: ["types/eslintIgnore.d.ts"] },
 	js.configs.recommended,
 	...tseslint.configs.recommended,
@@ -84,4 +85,4 @@ module.exports = [
 			"@typescript-eslint/no-wrapper-object-types": "off",
 		},
 	},
-];
+);
