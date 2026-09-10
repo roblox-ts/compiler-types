@@ -594,6 +594,11 @@ interface PromiseConstructor {
 	 * end)
 	 * ```
 	 */
+	fromEvent<T extends Array<unknown>>(
+		this: void,
+		event: RBXScriptSignal<(...args: T) => void>,
+		predicate?: (...args: T) => boolean,
+	): Promise<T[0]>;
 	fromEvent<T>(this: void, event: RBXScriptSignal<(value: T) => void>, predicate?: (value: T) => boolean): Promise<T>;
 	fromEvent(this: void, event: RBXScriptSignal<() => void>, predicate?: () => boolean): Promise<void>;
 	fromEvent<T>(
