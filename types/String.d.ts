@@ -11,6 +11,15 @@ interface String extends Iterable<string> {
 	 */
 	readonly _nominal_String: unique symbol;
 
-	/** The current number of characters in the string. */
+	/** the current number of bytes in the string */
 	size(this: string): number;
+
+	/**
+	 * returns the byte at a zero-based index as a one-byte string
+	 *
+	 * negative, fractional, and out-of-range indices return `undefined`
+	 * a byte from a multibyte UTF-8 character may not be valid UTF-8 on its own
+	 * string iteration and array destructuring operate on Unicode code points
+	 */
+	readonly [n: number]: string;
 }
